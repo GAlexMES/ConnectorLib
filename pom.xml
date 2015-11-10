@@ -5,7 +5,7 @@
 	<groupId>de.szut.dqi12.cheftrainer</groupId>
 	<artifactId>ConnectorLib</artifactId>
 	<version>0.0.1</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
 	<name>ConnectorLib</name>
 	<url>http://maven.apache.org</url>
@@ -13,6 +13,16 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
+
+
 
 	<dependencies>
 		<dependency>
@@ -38,6 +48,13 @@
 		<finalName>ConnectorLib</finalName>
 
 		<plugins>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
