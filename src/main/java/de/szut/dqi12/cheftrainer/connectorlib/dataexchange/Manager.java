@@ -23,6 +23,7 @@ public class Manager {
 	private int points;
 	private int rang;
 	private List<Transaction> transactions;
+	private Market market;
 	
 	private final SimpleStringProperty communityNameProperty;
 	private final SimpleStringProperty teamWorthProperty;
@@ -134,4 +135,11 @@ public class Manager {
 		return rangProperty;
 	}
 
+	public Market getMarket() {
+		return market;
+	}
+
+	public void setMarket(Market market) {
+		this.market = market;
+	}
 }

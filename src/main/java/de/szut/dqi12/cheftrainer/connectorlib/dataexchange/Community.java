@@ -36,6 +36,7 @@ public class Community {
 	
 	public Community(Market market){
 		managers = new ArrayList<Manager>();
+		managerDictionary = new HashMap<Integer, Manager>();
 		this.market = market;
 	}
 	
@@ -83,6 +84,10 @@ public class Community {
 
 	public void setCommunityID(int communityID) {
 		this.communityID = communityID;
+	}
+	
+	public void setMarket(Market market){
+		this.market=market;
 	}
 	
 }
