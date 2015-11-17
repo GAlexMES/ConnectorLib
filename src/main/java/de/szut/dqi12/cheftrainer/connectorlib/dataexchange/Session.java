@@ -25,9 +25,11 @@ public class Session {
 	private int currentCommunityID;
 
 	private ClientHandler clientHandler;
-	
-	private ObservableList<Manager> managerTableData= FXCollections.observableArrayList();
-	private ObservableList<MarketPlayer> transferMarketTableData = FXCollections.observableArrayList();
+
+	private ObservableList<Manager> managerTableData = FXCollections
+			.observableArrayList();
+	private ObservableList<MarketPlayer> transferMarketTableData = FXCollections
+			.observableArrayList();
 
 	private HashMap<Integer, Community> communityIDMap;
 	private HashMap<String, Community> communityNameMap;
@@ -35,17 +37,21 @@ public class Session {
 	public int getCurrentManagerID() {
 		return currentManagerID;
 	}
-	
+
 	public void setCurrentManager(Manager currentManager) {
 		setCurrentManager(currentManager.getID());
-		String communityName = currentManager.getCommunityNameProperty().getValue();
+		String communityName = currentManager.getCommunityNameProperty()
+				.getValue();
 		Community currentCommunity = communityNameMap.get(communityName);
 		currentCommunityID = currentCommunity.getCommunityID();
-		
+
 		transferMarketTableData = FXCollections.observableArrayList();
-		List<Player> playerList= currentCommunity.getMarket().getPlayers();
-		for(Player  p : playerList){
-			transferMarketTableData.add(p.getMarketPlayer());
+		Market market = currentCommunity.getMarket();
+		if (market != null) {
+			List<Player> playerList = market.getPlayers();
+			for (Player p : playerList) {
+				transferMarketTableData.add(p.getMarketPlayer());
+			}
 		}
 	}
 
@@ -60,25 +66,24 @@ public class Session {
 	public void setCurrentCommunityID(int currentCommunity) {
 		this.currentCommunityID = currentCommunity;
 	}
-	
 
 	public Session() {
 		communityIDMap = new HashMap<>();
 		communityNameMap = new HashMap<>();
 	}
-	
-	public Community getCurrentCommunity(){
+
+	public Community getCurrentCommunity() {
 		return communityIDMap.get(currentCommunityID);
 	}
-	
-	public Community getCommunity(Integer id){
+
+	public Community getCommunity(Integer id) {
 		return communityIDMap.get(id);
 	}
-	
-	public Community getCommunity(String name){
+
+	public Community getCommunity(String name) {
 		return communityNameMap.get(name);
 	}
-	
+
 	public void updateCommunities(List<Community> communities) {
 		communityIDMap = new HashMap<>();
 		addCommunities(communities);
@@ -101,10 +106,10 @@ public class Session {
 		}
 		addManagerToTable(managerList.toArray(new Manager[managerList.size()]));
 	}
-	
-	public void addManagerToTable(Manager... managers){
-		for(Manager m : managers){
-			if(m != null){
+
+	public void addManagerToTable(Manager... managers) {
+		for (Manager m : managers) {
+			if (m != null) {
 				managerTableData.add(m);
 			}
 		}
@@ -148,14 +153,14 @@ public class Session {
 	public HashMap<Integer, Community> getCommunityIDMap() {
 		return communityIDMap;
 	}
-	
+
 	public HashMap<String, Community> getCommunityNameMap() {
 		return communityNameMap;
 	}
-	
-	public List<Community> getCommunities(){
+
+	public List<Community> getCommunities() {
 		List<Community> retval = new ArrayList<Community>();
-		for(Integer s : communityIDMap.keySet()){
+		for (Integer s : communityIDMap.keySet()) {
 			retval.add(communityIDMap.get(s));
 		}
 		return retval;
@@ -164,11 +169,10 @@ public class Session {
 	public ObservableList<Manager> getManagerObservable() {
 		return managerTableData;
 	}
-	
+
 	public ObservableList<MarketPlayer> getMarketPlayerObservable() {
 		return transferMarketTableData;
 	}
-
 
 	/**
 	 * Should only be used on the server side.
