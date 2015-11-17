@@ -37,7 +37,6 @@ public class Player {
 		getPlayerFromJSON(playerJSON);
 		marketPlayer = new MarketPlayer(name, String.valueOf(points),
 				String.valueOf(worth), this);
-		sportalID = 0;
 	}
 
 	public Player(int worth, String name, int points, String position) {
