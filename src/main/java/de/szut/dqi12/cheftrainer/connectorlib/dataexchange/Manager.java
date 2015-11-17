@@ -1,8 +1,10 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -24,32 +26,76 @@ public class Manager {
 	private int rang;
 	private List<Transaction> transactions;
 	private Market market;
-	
+
 	private final SimpleStringProperty communityNameProperty;
 	private final SimpleStringProperty teamWorthProperty;
 	private final SimpleStringProperty rangProperty;
 
-    public Manager() {
-    	this(null,null,null,null);
-    }
+	public Manager() {
+		this(null, 0, 0, null);
+	}
 
-	public Manager(String managerName, Integer teamWorth, Integer rang, String communityName){
-		communityNameProperty =  new SimpleStringProperty(communityName);
-		teamWorthProperty =  new SimpleStringProperty(teamWorth+"€");
-		rangProperty =  new SimpleStringProperty(String.valueOf(rang));
-		
-		this.name =managerName;
-		this.teamWorth =teamWorth;
-		this.rang= rang;
+	public Manager(String managerName, Integer teamWorth, Integer rang, String communityName) {
+		communityNameProperty = new SimpleStringProperty(communityName);
+		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
+		rangProperty = new SimpleStringProperty(String.valueOf(rang));
+
+		this.name = managerName;
+		this.teamWorth = teamWorth;
+		this.rang = rang;
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
 	}
 
-	
-	private String formatDouble(Double d){
-		NumberFormat f = NumberFormat.getInstance();
-		f.setGroupingUsed(false);
-		return f.format(d);
+	public Manager(JSONObject managerJSON) {
+		this(managerJSON, "");
+	}
+
+	public Manager(JSONObject managerJSON, String communityName) {
+		this.players = new ArrayList<Player>();
+		this.lineUp = new ArrayList<Player>();
+
+		this.name = managerJSON.getString("Name");
+		this.points = managerJSON.getInt("Points");
+		this.setID(managerJSON.getInt("ID"));
+
+		JSONArray managersTeam = managerJSON.getJSONArray("Team");
+		teamWorth = 0;
+		for (int m = 0; m < managersTeam.length(); m++) {
+			JSONObject playerJSON = managersTeam.getJSONObject(m);
+			Player tempPlayer = new Player(playerJSON);
+			players.add(tempPlayer);
+			if (tempPlayer.isPlays()) {
+				lineUp.add(tempPlayer);
+			}
+			teamWorth = teamWorth + tempPlayer.getWorth();
+		}
+
+		JSONObject formationJSON = managerJSON.getJSONObject("Formation");
+		this.setFormation(new Formation(formationJSON));
+
+		communityNameProperty = new SimpleStringProperty(communityName);
+		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
+		rangProperty = new SimpleStringProperty(String.valueOf(0));
+	}
+
+	public JSONObject toJSON() {
+		JSONObject managerJSON = new JSONObject();
+		managerJSON.put("Points", this.getPoints());
+		managerJSON.put("Money", this.getMoney());
+		managerJSON.put("Name", this.getName());
+		managerJSON.put("ID", this.getID());
+		managerJSON.put("Team", teamToJson(this.getPlayers()));
+		managerJSON.put("Formation", this.getFormation().toJSON());
+		return managerJSON;
+	}
+
+	private static JSONArray teamToJson(List<Player> playerList) {
+		JSONArray teamJSON = new JSONArray();
+		for (Player p : playerList) {
+			teamJSON.put(p.toJSON());
+		}
+		return teamJSON;
 	}
 
 	public void addTransaction(Transaction transaction) {
@@ -72,11 +118,11 @@ public class Manager {
 		this.transactions = transactions;
 	}
 
-	public void addPlayer(List<Player> players){
+	public void addPlayer(List<Player> players) {
 		Player[] playerArray = players.toArray(new Player[players.size()]);
 		addPlayer(playerArray);
 	}
-	
+
 	public void addPlayer(Player... player) {
 		for (Player p : player) {
 			this.players.add(p);
@@ -87,8 +133,22 @@ public class Manager {
 		return lineUp;
 	}
 
-	public void setLineUp(ArrayList<Player> lineUp) {
+	public void setLineUp(List<Player> lineUp) {
 		this.lineUp = lineUp;
+
+		List<Integer> sportalIDList = new ArrayList<>();
+		for (Player p : lineUp) {
+			sportalIDList.add(p.getSportalID());
+		}
+
+		for (int i = 0; i < players.size(); i++) {
+			if (sportalIDList.contains(players.get(i).getSportalID())) {
+				players.get(i).setPlays(true);
+			} else {
+				players.get(i).setPlays(false);
+			}
+		}
+
 	}
 
 	public String getName() {
@@ -118,8 +178,8 @@ public class Manager {
 	public Integer getTeamWorth() {
 		return teamWorth;
 	}
-	
-	public void setTeamWorth(Integer teamWorth){
+
+	public void setTeamWorth(Integer teamWorth) {
 		this.teamWorth = teamWorth;
 	}
 
