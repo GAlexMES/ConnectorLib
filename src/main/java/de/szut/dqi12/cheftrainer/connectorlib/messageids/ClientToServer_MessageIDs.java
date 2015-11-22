@@ -11,4 +11,5 @@ public class ClientToServer_MessageIDs extends MessageIDAbstract{
 	public static String COMMUNITY_AUTHENTIFICATION = "CommunityAuthentification";
 	public static String REQUEST_UPDATE = "UpdateRequest";
 	public static String NEW_FORMATION = "NewFormationUpdate";
+	public static String TRANSFER_MARKET = "TransferMarketUpdate";
 }
