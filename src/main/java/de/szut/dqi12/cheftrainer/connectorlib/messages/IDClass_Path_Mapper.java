@@ -1,7 +1,5 @@
 package de.szut.dqi12.cheftrainer.connectorlib.messages;
 
-import java.net.URL;
-
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MessageIDAbstract;
 
 
@@ -13,10 +11,10 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MessageIDAbstract;
 public class IDClass_Path_Mapper {
 	
 	private MessageIDAbstract mesIDabs;
-	private URL pathToDir;
+	private String pathToDir;
 	private String packagePathToDir;
 	
-	public IDClass_Path_Mapper(MessageIDAbstract mesIDAbs, URL pathToDir, String packagePathToDir){
+	public IDClass_Path_Mapper(MessageIDAbstract mesIDAbs, String pathToDir, String packagePathToDir){
 		this.mesIDabs = mesIDAbs;
 		this.pathToDir = pathToDir;
 		this.packagePathToDir = packagePathToDir;
@@ -28,10 +26,10 @@ public class IDClass_Path_Mapper {
 	public void setMesIDabs(MessageIDAbstract mesIDabs) {
 		this.mesIDabs = mesIDabs;
 	}
-	public URL getPathToDir() {
+	public String getPathToDir() {
 		return pathToDir;
 	}
-	public void setPathToDir(URL pathToDir) {
+	public void setPathToDir(String pathToDir) {
 		this.pathToDir = pathToDir;
 	}
 	public String getPackagePathToDir() {
