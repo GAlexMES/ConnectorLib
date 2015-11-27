@@ -1,15 +1,37 @@
 package de.szut.dqi12.cheftrainer.connectorlib.callables;
 
 import java.io.IOException;
+
 import java.net.URLClassLoader;
 import java.net.URL;
 import java.util.List;
 import java.util.HashMap;
+
+/**
+ * The CallableController class creates instances of classes, which extends a {@link CallableController}
+ *  and are saved in the given director.
+ * @author Alexander Brennecke
+ *
+ */
 public class CallableController
 {
+	
 	private static String FILE_PATH;
 	private static String packagePath;
 	private static HashMap<String, CallableAbstract> retval;
+	
+	/**
+	 * This function creates a list of {@link CallableAbstract} objects. 
+	 * Each String in the fieldList has to match to a class in the pathToCallableDir director.
+	 * For example:
+	 * When the String is "AESKey" and the pathToCallableDir is "de/szut/dqi12/cheftrainer/callables/", then there must
+	 *  be a AESKey.java/.class file in the "de/szut/dqi12/cheftrainer/callables/" director.
+	 *  
+	 * @param fieldList a List of Strings, which can be mapped to a class in the pathToCallableDir
+	 * @param pathToCallableDir a path to a director, in which the classes are saved, that can be mapped to the fieldList Strings.
+	 * @param packagePathToCallableDir the package path of the mapped classes. For example: "de.szut.dqi12.cheftrainer.callables"
+	 * @return a Map, where the key is a element of the fieldList Strings, and the value is a created matching instance of a class extending {@link CallableAbstract}
+	 */
 	public static HashMap<String, CallableAbstract> getInstancesForIDs(final List<String> fieldList, final String pathToCallableDir, final String packagePathToCallableDir) {
 		CallableController.packagePath = "";
 		CallableController.FILE_PATH = pathToCallableDir;
@@ -22,6 +44,11 @@ public class CallableController
 		return CallableController.retval;
 	}
 
+	/**
+	 * This method tries to call the generateInstance() method. When the generateInstance() method 
+	 * returns a result, this result will put in the HashMap, which will be returned by the getInstanceForIDs() function.
+	 * @param messageID The ID, which should match to a class int the FILE_PATH
+	 */
 	private static void mapClassToID(final String messageID) {
 		try {
 			final CallableAbstract tempCallable = generateInstance(CallableController.FILE_PATH, messageID);
@@ -35,6 +62,13 @@ public class CallableController
 		}
 	}
 
+	/**
+	 * This function creates a {@link ClassLoader} and tries to create a new instance of a {@link CallableAbstract} for the given parameters.
+	 * @param pathString The absolute path to the director, in which the file is saved
+	 * @param className The name of the class, that should be loaded.
+	 * @return a new {@link CallableAbstract} instance for the given class.
+	 * @throws CallableMappingException
+	 */
 	private static CallableAbstract generateInstance(final String pathString, final String className) throws CallableMappingException {
 		CallableAbstract classInstance = null;
 		URLClassLoader cl = null;
@@ -43,6 +77,7 @@ public class CallableController
 			final URL[] classLoaderUrls = { path };
 			cl = new URLClassLoader(classLoaderUrls);
 			final String fullQualifiedName = CallableController.packagePath + className;
+			@SuppressWarnings("unchecked")
 			final Class<CallableAbstract> c = (Class<CallableAbstract>) cl.loadClass(fullQualifiedName);
 			classInstance = c.newInstance();
 			if (classInstance == null) {
@@ -70,6 +105,7 @@ public class CallableController
 		}
 		return classInstance;
 	}
+	
 	static {
 		CallableController.packagePath = "";
 	}
