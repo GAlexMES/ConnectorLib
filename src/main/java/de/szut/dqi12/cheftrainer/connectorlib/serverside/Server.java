@@ -25,8 +25,6 @@ public class Server implements Runnable {
 	private ArrayList<ClientHandler> clientHandlerList = new ArrayList<ClientHandler>();
 	private ServerProperties serverProps;
 	
-	
-	
 	private final static Logger LOGGER = Logger.getLogger(Server.class);
 
 	/**
@@ -85,6 +83,12 @@ public class Server implements Runnable {
 		t.start();
 	}
 	
+	/**
+	 * This function removes the given {@link ClientHandler} ,
+	 * and {@link Thread} from the lists.
+	 * @param clientHandler the {@link ClientHandler}, that should be removed
+	 * @param t the {@link Thread}, that should be removed from the thread list
+	 */
 	public void removeClient(ClientHandler clientHandler, Thread t){
 		clientHandlerList.remove(clientHandler);
 		clientList.remove(t);

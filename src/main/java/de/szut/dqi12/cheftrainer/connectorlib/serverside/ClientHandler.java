@@ -152,6 +152,9 @@ public class ClientHandler implements Runnable {
 		}
 	}
 	
+	/**
+	 * This function removes the client from the client list and destroys the socket.
+	 */
 	private void closeConnection(){
 		LOGGER.info(LoggingMessages.CLIENT_DISCONNECTED + socket.getInetAddress().getHostAddress());
 		server.removeClient(this, Thread.currentThread());
