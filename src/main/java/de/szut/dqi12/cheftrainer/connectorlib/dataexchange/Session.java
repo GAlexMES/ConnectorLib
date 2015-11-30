@@ -37,6 +37,11 @@ public class Session {
 	public int getCurrentManagerID() {
 		return currentManagerID;
 	}
+	
+	public Manager getCurrentManager(){
+		Community com = communityIDMap.get(currentCommunityID);
+		return com.getManager(currentManagerID);
+	}
 
 	public void setCurrentManager(Manager currentManager) {
 		setCurrentManager(currentManager.getID());
@@ -97,14 +102,9 @@ public class Session {
 	}
 
 	public void addCommunities(List<Community> communities) {
-		List<Manager> managerList = new ArrayList<>();
 		for (Community c : communities) {
-			communityIDMap.put(c.getCommunityID(), c);
-			communityNameMap.put(c.getName(), c);
-			c.findeUsersManager(user.getUserName());
-			managerList.add(c.getUsersManager());
+			addCommunity(c);
 		}
-		addManagerToTable(managerList.toArray(new Manager[managerList.size()]));
 	}
 
 	public void addManagerToTable(Manager... managers) {

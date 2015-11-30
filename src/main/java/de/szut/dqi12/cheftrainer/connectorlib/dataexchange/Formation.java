@@ -2,7 +2,7 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import org.json.JSONObject;
 
-public class Formation {
+public class Formation extends Sendable{
 	
 	private int defenders;
 	private int middfielders;

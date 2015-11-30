@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Robin
  *
  */
-public class Manager {
+public class Manager extends Sendable{
 
 	private int id;
 	private String name;

@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * @author Robin
  *
  */
-public class Player {
+public class Player extends Sendable {
 	private int worth;
 	private String name;
 	private int points;
@@ -209,6 +209,7 @@ public class Player {
 		}
 	}
 
+	@Override
 	public JSONObject toJSON() {
 		JSONObject retval = new JSONObject();
 		retval.put("name", getDefault(this.getName()));

@@ -5,60 +5,76 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * 
  * @author Robin
  *
  */
-public class Community {
+public class Community extends Sendable {
 
 	private int communityID;
 	private String name;
 	private List<Manager> managers;
-	private Map<Integer,Manager> managerDictionary;
+	private Map<Integer, Manager> managerDictionary;
 	private Market market;
 	private Manager usersManager;
-	
-	
-	public Community(){
-		managers= new ArrayList<>();
+
+	public Community() {
+		managers = new ArrayList<>();
 		managerDictionary = new HashMap<Integer, Manager>();
 	}
-	
-	public void findeUsersManager(String userName){
-		for(Integer i: managerDictionary.keySet()){
-			if(managerDictionary.get(i).getName().equals(userName)){
+
+	public Community(JSONObject json) {
+		this();
+		setCommunityID(json.getInt("ID"));
+		setName(json.getString("Name"));
+		JSONArray managersJSON = json.getJSONArray("Managers");
+		for (int i = 0; i < managersJSON.length(); i++) {
+			JSONObject managerJSON = new JSONObject(managersJSON.get(i).toString());
+			Manager manager = new Manager(managerJSON,name);
+			addManager(manager);
+		}
+		setMarket(new Market(json.getJSONObject("ExchangeMarket")));
+	}
+
+	public void findeUsersManager(String userName) {
+		for (Integer i : managerDictionary.keySet()) {
+			if (managerDictionary.get(i).getName().equals(userName)) {
 				usersManager = managerDictionary.get(i);
 				break;
 			}
 		}
 	}
-	
-	public Community(Market market){
-		managers = new ArrayList<Manager>();
-		managerDictionary = new HashMap<Integer, Manager>();
+
+	public Community(Market market) {
+		this();
 		this.market = market;
 	}
-	
-	public void addManager(Manager manager){
+
+	public void addManager(Manager manager) {
 		this.managers.add(manager);
 		managerDictionary.put(manager.getID(), manager);
 	}
-	
-	public void addManagers(List<Manager> managerList){
+
+	public void addManagers(List<Manager> managerList) {
 		managers.addAll(managerList);
-		for(Manager m : managerList){
+		for (Manager m : managerList) {
 			managerDictionary.put(m.getID(), m);
 		}
 	}
-	
-	public void setUsersManager(Manager m){
-		this.usersManager=m;
+
+	public void setUsersManager(Manager m) {
+		this.usersManager = m;
 	}
-	public Manager getUsersManager(){
+
+	public Manager getUsersManager() {
 		return usersManager;
 	}
-	public Manager getManager(int ID){
+
+	public Manager getManager(int ID) {
 		return managerDictionary.get(ID);
 	}
 
@@ -85,9 +101,23 @@ public class Community {
 	public void setCommunityID(int communityID) {
 		this.communityID = communityID;
 	}
-	
-	public void setMarket(Market market){
-		this.market=market;
+
+	public void setMarket(Market market) {
+		this.market = market;
 	}
-	
+
+	@Override
+	public JSONObject toJSON() {
+		JSONObject retval = new JSONObject();
+		retval.put("ID", communityID);
+		retval.put("Name", name);
+		JSONArray managersJSON = new JSONArray();
+		for (Manager m : managers) {
+			managersJSON.put(m.toJSON());
+		}
+		retval.put("Managers", managersJSON);
+		retval.put("ExchangeMarket", market.toJSON());
+		return retval;
+	}
+
 }

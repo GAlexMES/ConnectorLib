@@ -1,11 +1,13 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
+import org.json.JSONObject;
+
 /**
  * 
  * @author Robin
  *
  */
-public class Transaction {
+public class Transaction extends Sendable {
 	
 	//von Robin
 	private Double price;
@@ -96,6 +98,24 @@ public class Transaction {
 
 	public void setManagerID(int managerID) {
 		this.managerID = managerID;
+	}
+	
+	public Transaction(JSONObject json){
+		offeredPrice = json.getInt("Preis");
+		playerSportalID = json.getInt("SportalID");
+		communityID = json.getInt("SpielrundenID");
+		userID = json.getInt("UserID");
+		managerID = json.getInt("ManagerID");
+	}
+	
+	public JSONObject toJSON(){
+		JSONObject retval = new JSONObject();
+		retval.put("Preis", offeredPrice);
+		retval.put("SportalID",  playerSportalID);
+		retval.put("SpielrundenID", communityID);
+		retval.put("UserID", userID);
+		retval.put("ManagerID", managerID);
+		return retval;
 	}
 	
 	
