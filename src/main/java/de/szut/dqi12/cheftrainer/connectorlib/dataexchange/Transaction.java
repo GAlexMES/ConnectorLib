@@ -1,5 +1,7 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
+import java.util.Map;
+
 import org.json.JSONObject;
 
 /**
@@ -9,55 +11,32 @@ import org.json.JSONObject;
  */
 public class Transaction extends Sendable {
 	
-	//von Robin
-	private Double price;
-	private boolean outgoing;
-	private String tenderer;
-	private String receiver;
-	private Player player;
-	
-	
-	//von Alex
 	private int offeredPrice;
 	private int playerSportalID;
 	private int communityID;
 	private int userID;
 	private int managerID;
 	
+	private boolean outgoing;
+	private Player player;
+	
 	public Transaction(){}
 	
-	//von Robin
-	public Transaction(Double price, boolean outgoing, String tenderer,
-			String receiver, Player player) {
-		this.price = price;
-		this.outgoing = outgoing;
-		this.tenderer = tenderer;
-		this.receiver = receiver;
-		this.player = player;
-	}
-	
-	public Double getPrice() {
-		return price;
-	}
-	public boolean isOutgoing() {
-		return outgoing;
-	}
-	public String getTenderer() {
-		return tenderer;
-	}
-	public String getReceiver() {
-		return receiver;
-	}
-	public Player getPlayer() {
-		return player;
-	}
-	
-	//von Alex
 	public Transaction(int price, int playerID, int communityID, int userID){
 		this.offeredPrice = price;
 		this.playerSportalID = playerID;
 		this.communityID = communityID;
 		this.userID = userID;
+	}
+	
+	public void takeInformation(Session s){
+		outgoing = s.getCurrentManager().getID() == managerID;
+		Map<Integer,Player> players = s.getCurrentCommunity().getMarket().getPlayerMap();
+		player= players.get(playerSportalID);
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public int getOfferedPrice() {
@@ -116,6 +95,10 @@ public class Transaction extends Sendable {
 		retval.put("UserID", userID);
 		retval.put("ManagerID", managerID);
 		return retval;
+	}
+
+	public boolean isOutgoing() {
+		return outgoing;
 	}
 	
 	

@@ -1,7 +1,9 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,23 +15,24 @@ import org.json.JSONObject;
  */
 public class Market extends Sendable{
 	private List<Player> players;
+	private Map<Integer,Player> playerMap;
 	private List<Transaction> transactionList;
 
 	public Market() {
 		players = new ArrayList<>();
 		transactionList = new ArrayList<>();
+		playerMap = new HashMap<>();
 	}
 	
 	public Market(JSONObject json) {
+		this();
 		JSONArray playerList = json.getJSONArray("Spieler");
-		this.players = new ArrayList<Player>();
 		for (int i = 0; i < playerList.length(); i++) {
 			Player p = new Player();
 			p.getPlayerFromJSON(playerList.getJSONObject(i));
-			players.add(p);
+			addPlayer(p);
 		}
 		
-		this.transactionList = new ArrayList<>();
 		JSONArray transactions = json.getJSONArray("Gebote");
 		for (int i = 0; i < transactions.length(); i++) {
 			Transaction t = new Transaction(transactions.getJSONObject(i));
@@ -40,11 +43,16 @@ public class Market extends Sendable{
 	public void addPlayer(Player... players) {
 		for (Player p : players) {
 			this.players.add(p);
+			playerMap.put(p.getSportalID(),p);
 		}
 	}
 
 	public List<Player> getPlayers() {
 		return this.players;
+	}
+	
+	public Map<Integer,Player> getPlayerMap(){
+		return playerMap;
 	}
 	
 	public void setTransactions(List<Transaction> transactions){
@@ -72,5 +80,9 @@ public class Market extends Sendable{
 			retval.put(s.toJSON());
 		}
 		return retval;
+	}
+
+	public void addTransaction(Transaction tr){
+		transactionList.add(tr);
 	}
 }
