@@ -9,9 +9,10 @@ import org.json.JSONObject;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
+ * The Manager class stores all information about an {@link User}s manager in one {@link Community}.
  * 
  * @author Robin
- *
+ * @custom.position /D0030/ 
  */
 public class Manager extends Sendable{
 
@@ -153,6 +154,10 @@ public class Manager extends Sendable{
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double getMoney() {

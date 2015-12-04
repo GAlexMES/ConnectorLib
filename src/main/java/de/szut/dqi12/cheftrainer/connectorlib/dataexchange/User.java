@@ -2,6 +2,11 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import org.json.JSONObject;
 
+/**
+ * The user class saves all information about the user, who has been logged in at the client.
+ * @author Alexander Brennecke
+ * @custom.position /D0010/
+ */
 public class User {
 	
 	String firstName = "";

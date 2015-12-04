@@ -41,6 +41,21 @@ public class Formation extends Sendable{
 		this.name = name;
 	}
 	
+	public int getPlayersForPosition(String position){
+		switch(position){
+		case Position.DEFENCE:
+			return defenders;
+		case Position.MIDDLE:
+			return middfielders;
+		case Position.OFFENCE:
+			return offensives;
+		case Position.KEEPER:
+			return 1;
+		}
+		
+		return 0;
+	}
+	
 	public Formation(JSONObject json){
 		this.defenders = json.getInt(Position.DEFENCE);
 		this.middfielders = json.getInt(Position.MIDDLE);

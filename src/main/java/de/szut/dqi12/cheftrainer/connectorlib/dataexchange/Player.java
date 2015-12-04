@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 import org.json.JSONObject;
 
 /**
- * 
+ * The player class stores all nested information about a player.
  * @author Robin
- *
+ * @custom.position /D0020/
  */
 public class Player extends Sendable {
 	private int worth;
