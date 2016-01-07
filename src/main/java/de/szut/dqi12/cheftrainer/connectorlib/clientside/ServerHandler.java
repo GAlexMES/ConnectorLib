@@ -61,7 +61,6 @@ public class ServerHandler implements Runnable {
 		try {
 			while ((message = reader.readLine()) != null) {
 				messageController.receiveMessage(message);
-				System.out.println("receive:   "+message);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

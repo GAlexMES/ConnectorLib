@@ -145,8 +145,23 @@ public class MessageController {
 	 */
 	private void handleMessage(Message message) throws MessageException {
 		String messageID = message.getMessageID();
-		LOGGER.info(LoggingMessages.NEW_MESSAGE + messageID);
+		String ip = getIP();
+		LOGGER.info(ip+": "+LoggingMessages.NEW_MESSAGE + messageID);
 		callableMap.get(messageID).messageArrived(message);
+	}
+	
+	/**
+	 * Just used for the detailed logging.
+	 * @return This method returns the IP of the client, which owns this {@link MessageController}. Or the word "Server", if the Server owns this controller
+	 */
+	
+	private String getIP(){
+		try{
+			return clientHandler.getSocket().getInetAddress().getHostAddress();
+		}
+		catch(NullPointerException npee){
+			return "Server";
+		}
 	}
 
 	/**

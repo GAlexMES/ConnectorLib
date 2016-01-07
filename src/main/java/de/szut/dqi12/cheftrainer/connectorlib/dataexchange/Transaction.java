@@ -11,7 +11,7 @@ import org.json.JSONObject;
  */
 public class Transaction extends Sendable {
 	
-	private int offeredPrice;
+	private long offeredPrice;
 	private int playerSportalID;
 	private int communityID;
 	private int userID;
@@ -22,7 +22,7 @@ public class Transaction extends Sendable {
 	
 	public Transaction(){}
 	
-	public Transaction(int price, int playerID, int communityID, int userID){
+	public Transaction(long price, int playerID, int communityID, int userID){
 		this.offeredPrice = price;
 		this.playerSportalID = playerID;
 		this.communityID = communityID;
@@ -39,7 +39,7 @@ public class Transaction extends Sendable {
 		return player;
 	}
 
-	public int getOfferedPrice() {
+	public long getOfferedPrice() {
 		return offeredPrice;
 	}
 
@@ -59,7 +59,7 @@ public class Transaction extends Sendable {
 		return managerID;
 	}
 
-	public void setOfferedPrice(int offeredPrice) {
+	public void setOfferedPrice(long offeredPrice) {
 		this.offeredPrice = offeredPrice;
 	}
 

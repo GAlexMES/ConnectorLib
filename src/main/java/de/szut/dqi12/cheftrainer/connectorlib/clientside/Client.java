@@ -3,6 +3,8 @@ package de.szut.dqi12.cheftrainer.connectorlib.clientside;
 import java.io.IOException;
 import java.net.Socket;
 
+import org.apache.log4j.Logger;
+
 import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
 /**
@@ -16,6 +18,7 @@ public class Client {
 	private ClientProperties clientProps;
 	private ServerHandler servHandler;
 	
+	private final static Logger LOGGER = Logger.getLogger(Client.class);
 	/**
 	 * Constructor
 	 * @param conInterface
@@ -50,6 +53,9 @@ public class Client {
 	public void sendMessage(Message message){
 		if(servHandler!=null){
 			servHandler.sendMessage(message);
+		}
+		else{
+			LOGGER.error("No ServerHandler defined. Message could not be sent.");
 		}
 	}
 	
