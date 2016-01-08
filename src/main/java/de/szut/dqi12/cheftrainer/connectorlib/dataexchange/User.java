@@ -2,12 +2,18 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.AdditionalMessageIDs;
+
 /**
  * The user class saves all information about the user, who has been logged in at the client.
  * @author Alexander Brennecke
  * @custom.position /D0010/
  */
 public class User {
+	
+	public static final String FIRST_NAME = "firstName";
+	public static final String LAST_NAME ="lastName";
+	public static final String E_MAIL = "mail";
 	
 	String firstName = "";
 	String lastName = "";
@@ -18,13 +24,21 @@ public class User {
 	int userID;
 	
 	public void setWithJSON(JSONObject json){
-		firstName = json.getString("vorname");
-		lastName = json.getString("nachname");
-		eMail = json.getString("mail");
-		userName = json.getString("login");
-		password = json.getString("password");
+		firstName = json.getString(FIRST_NAME);
+		lastName = json.getString(LAST_NAME);
+		eMail = json.getString(E_MAIL);
+		userName = json.getString(AdditionalMessageIDs.LOGIN);
+		password = json.getString(AdditionalMessageIDs.PASSWORD);
 	}
-	
+	public JSONObject toJSON(){
+		JSONObject retval = new JSONObject();
+		retval.put(FIRST_NAME, firstName);
+		retval.put(LAST_NAME, lastName);
+		retval.put(E_MAIL, eMail);
+		retval.put(AdditionalMessageIDs.PASSWORD, password);
+		retval.put(AdditionalMessageIDs.LOGIN, userName);
+		return retval;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -65,6 +79,8 @@ public class User {
 		String retval = "'"+firstName +"', '" + lastName +"', '" + userName +"', '" + eMail +"', '" + password+"'";
 		return retval;
 	}
+	
+
 	
 	
 

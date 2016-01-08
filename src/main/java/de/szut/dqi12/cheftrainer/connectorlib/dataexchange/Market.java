@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.AdditionalMessageIDs;
+
 /**
  * 
  * @author Robin
@@ -26,14 +28,14 @@ public class Market extends Sendable{
 	
 	public Market(JSONObject json) {
 		this();
-		JSONArray playerList = json.getJSONArray("Spieler");
+		JSONArray playerList = json.getJSONArray(AdditionalMessageIDs.PLAYER);
 		for (int i = 0; i < playerList.length(); i++) {
 			Player p = new Player();
 			p.getPlayerFromJSON(playerList.getJSONObject(i));
 			addPlayer(p);
 		}
 		
-		JSONArray transactions = json.getJSONArray("Gebote");
+		JSONArray transactions = json.getJSONArray(AdditionalMessageIDs.TRANSACTIONS);
 		for (int i = 0; i < transactions.length(); i++) {
 			Transaction t = new Transaction(transactions.getJSONObject(i));
 			transactionList.add(t);
@@ -68,8 +70,8 @@ public class Market extends Sendable{
 		JSONArray transactions = listToJSON(transactionList);
 		
 		JSONObject retval = new JSONObject();
-		retval.put("Spieler", playerList);
-		retval.put("Gebote", transactions);
+		retval.put(AdditionalMessageIDs.PLAYER, playerList);
+		retval.put(AdditionalMessageIDs.TRANSACTIONS, transactions);
 		
 		return retval;
 	}

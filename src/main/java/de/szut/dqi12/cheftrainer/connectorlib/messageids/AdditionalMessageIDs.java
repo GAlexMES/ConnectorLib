@@ -8,6 +8,8 @@ public class AdditionalMessageIDs {
 	public static final String CREATION = "creation";
 	public static final String ENTER = "enter";
 	
+	public static final String AUTHENTIFICATION_TYPE = "authentificationType";
+	public static final String AUTHENTIFICATE = "authentificate";
 	public static final String REGISTRATION = "registration";
 	public static final String LOGIN = "login";
 	
@@ -24,13 +26,18 @@ public class AdditionalMessageIDs {
 	public static final String COMMUNITY = "community";
 	public static final String COMMUNITY_NAME = "communityName";
 	public static final String COMMUNITY_ID ="community_id";
+	public static final String COMMUNITY_LIST = "CommunityList";
 	
 	public static final String PASSWORD = "password";
 	
 	public static final String SUCCESFULL = "successful";
 	
-	public static final String NEW_OFFER =" NewOffer";
+	public static final String NEW_OFFER = "NewOffer";
 	
+	public static final String ACCEPT = "accept";
+	public static final String REMOVE = "remove";
 	
-
+	public static final String PLAYER="player";
+	
+	public static final String UPDATE = "update";
 }
