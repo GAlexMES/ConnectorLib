@@ -8,7 +8,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import de.szut.dqi12.cheftrainer.connectorlib.messageids.AdditionalMessageIDs;
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
 /**
  * 
@@ -16,6 +16,9 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.AdditionalMessageIDs;
  *
  */
 public class Market extends Sendable{
+	
+	public static final String MARKET = "market";
+	
 	private List<Player> players;
 	private Map<Integer,Player> playerMap;
 	private List<Transaction> transactionList;
@@ -28,14 +31,14 @@ public class Market extends Sendable{
 	
 	public Market(JSONObject json) {
 		this();
-		JSONArray playerList = json.getJSONArray(AdditionalMessageIDs.PLAYER);
+		JSONArray playerList = json.getJSONArray(Player.PLAYER);
 		for (int i = 0; i < playerList.length(); i++) {
 			Player p = new Player();
 			p.getPlayerFromJSON(playerList.getJSONObject(i));
 			addPlayer(p);
 		}
 		
-		JSONArray transactions = json.getJSONArray(AdditionalMessageIDs.TRANSACTIONS);
+		JSONArray transactions = json.getJSONArray(MIDs.TRANSACTIONS);
 		for (int i = 0; i < transactions.length(); i++) {
 			Transaction t = new Transaction(transactions.getJSONObject(i));
 			transactionList.add(t);
@@ -70,8 +73,8 @@ public class Market extends Sendable{
 		JSONArray transactions = listToJSON(transactionList);
 		
 		JSONObject retval = new JSONObject();
-		retval.put(AdditionalMessageIDs.PLAYER, playerList);
-		retval.put(AdditionalMessageIDs.TRANSACTIONS, transactions);
+		retval.put(Player.PLAYER, playerList);
+		retval.put(MIDs.TRANSACTIONS, transactions);
 		
 		return retval;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RealTeam {
+	public static final String TEAM = "team";
 	private String teamUrl;
 	private String teamName;
 	private String logoURL;

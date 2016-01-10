@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Position {
+	public static final String POSITION = "position";
+	
 	public static final String KEEPER = "Tor";
 	public static final String DEFENCE = "Verteidigung";
 	public static final String MIDDLE = "Mittelfeld";

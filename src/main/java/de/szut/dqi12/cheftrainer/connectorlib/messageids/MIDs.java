@@ -1,6 +1,6 @@
 package de.szut.dqi12.cheftrainer.connectorlib.messageids;
 
-public class AdditionalMessageIDs {
+public class MIDs {
 	public static final String MODE = "mode";
 	public static final String TYPE ="type";
 	public static final String INFORMATION = "information";
@@ -17,6 +17,7 @@ public class AdditionalMessageIDs {
 	public static final String UPDATE_COMMUNITY = "updateCommunity";
 	public static final String NEW_COMMUNITY = "newCommunity";
 	
+	public static final String UPDATE = "update";
 	public static final String UPDATE_TYPE = "updateType";
 	public static final String UPDATE_MESSAGE = "updateMessage";
 	
@@ -28,7 +29,10 @@ public class AdditionalMessageIDs {
 	public static final String COMMUNITY_ID ="community_id";
 	public static final String COMMUNITY_LIST = "CommunityList";
 	
+	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
+	public static final String EMAIL_EXISTS = "existEMail";
+	public static final String USER_EXISTS = "userExist";
 	
 	public static final String SUCCESFULL = "successful";
 	
@@ -37,7 +41,9 @@ public class AdditionalMessageIDs {
 	public static final String ACCEPT = "accept";
 	public static final String REMOVE = "remove";
 	
-	public static final String PLAYER="player";
+	public static final String USER_ID = "UserID";
 	
-	public static final String UPDATE = "update";
+	public static final String ID = "id";
+	
+	
 }

@@ -7,12 +7,26 @@ import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
+
 /**
  * The player class stores all nested information about a player.
  * @author Robin
  * @custom.position /D0020/
  */
 public class Player extends Sendable {
+
+	public static final String PLAYER="player";
+	public static final String PRICE = "price";
+	public static final String SPORTAL_ID = "sportalID";
+	public static final String NUMBER= "playerNumber";
+	public static final String POINTS = "playerPoints";
+	public static final String WORTH = "playerWorth";
+	public static final String IS_PLAYING = "isPlaying";
+	public static final String IMG_URL = "pictureURL";
+	public static final String BIRTHDAY ="birthday";
+	
+	
 	private int worth;
 	private String name;
 	private int points;
@@ -209,35 +223,37 @@ public class Player extends Sendable {
 		}
 	}
 
+	public static final String PLAYER_NAME ="playerName";
+	
 	@Override
 	public JSONObject toJSON() {
 		JSONObject retval = new JSONObject();
-		retval.put("name", getDefault(this.getName()));
-		retval.put("id", getDefault(this.getID()));
-		retval.put("number", getDefault(this.getNumber()));
-		retval.put("points", getDefault(this.getPoints()));
-		retval.put("worth", getDefault(this.getWorth()));
-		retval.put("position", getDefault(this.getPosition()));
-		retval.put("team", getDefault(this.getTeamName()));
-		retval.put("plays", getDefault(this.plays()));
-		retval.put("pictureURL", getDefault(this.getAbsolutePictureURL()));
-		retval.put("sportalID", getDefault(this.getSportalID()));
-		retval.put("birthday", getDefault(this.getBirthdateString()));
+		retval.put(PLAYER_NAME, getDefault(this.getName()));
+		retval.put(MIDs.ID, getDefault(this.getID()));
+		retval.put(NUMBER, getDefault(this.getNumber()));
+		retval.put(POINTS, getDefault(this.getPoints()));
+		retval.put(WORTH, getDefault(this.getWorth()));
+		retval.put(Position.POSITION, getDefault(this.getPosition()));
+		retval.put(RealTeam.TEAM, getDefault(this.getTeamName()));
+		retval.put(IS_PLAYING, getDefault(this.plays()));
+		retval.put(IMG_URL, getDefault(this.getAbsolutePictureURL()));
+		retval.put(SPORTAL_ID, getDefault(this.getSportalID()));
+		retval.put(BIRTHDAY, getDefault(this.getBirthdateString()));
 		return retval;
 	}
 
 	public void getPlayerFromJSON(JSONObject playerJSON) {
-		this.setName(playerJSON.getString("name"));
-		this.setID(playerJSON.getInt("id"));
-		this.setNumber(playerJSON.getInt("number"));
-		this.setPoints(playerJSON.getInt("points"));
-		this.setWorth(playerJSON.getInt("worth"));
-		this.setPosition(playerJSON.getString("position"));
-		this.setTeamName(playerJSON.getString("team"));
-		this.setPlays(playerJSON.getBoolean("plays"));
-		this.setAbsolutePictureURL(playerJSON.getString("pictureURL"));
-		this.setSportalID(playerJSON.getInt("sportalID"));
-		this.setBirthdate(playerJSON.getString("birthday"));
+		this.setName(playerJSON.getString(PLAYER_NAME));
+		this.setID(playerJSON.getInt(MIDs.ID));
+		this.setNumber(playerJSON.getInt(NUMBER));
+		this.setPoints(playerJSON.getInt(POINTS));
+		this.setWorth(playerJSON.getInt(WORTH));
+		this.setPosition(playerJSON.getString(Position.POSITION));
+		this.setTeamName(playerJSON.getString(RealTeam.TEAM));
+		this.setPlays(playerJSON.getBoolean(IS_PLAYING));
+		this.setAbsolutePictureURL(playerJSON.getString(IMG_URL));
+		this.setSportalID(playerJSON.getInt(SPORTAL_ID));
+		this.setBirthdate(playerJSON.getString(BIRTHDAY));
 		marketPlayer = new MarketPlayer(name, String.valueOf(points), "no information available", this);
 	}
 

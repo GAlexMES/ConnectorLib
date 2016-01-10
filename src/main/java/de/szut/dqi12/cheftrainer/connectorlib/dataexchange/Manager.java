@@ -15,6 +15,9 @@ import javafx.beans.property.SimpleStringProperty;
  * @custom.position /D0030/ 
  */
 public class Manager extends Sendable{
+	
+	public static final String MANAGER_ID = "managerID";
+	public static final String MANAGER_LIST = "managerList";
 
 	private int id;
 	private String name;

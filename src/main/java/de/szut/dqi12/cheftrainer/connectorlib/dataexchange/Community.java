@@ -14,6 +14,9 @@ import org.json.JSONObject;
  *
  */
 public class Community extends Sendable {
+	
+	public static final String COMMUNITY_ID = "communityID";
+	public static final String COMMUNITY_NAME = "communityNAME";
 
 	private int communityID;
 	private String name;
@@ -29,15 +32,29 @@ public class Community extends Sendable {
 
 	public Community(JSONObject json) {
 		this();
-		setCommunityID(json.getInt("ID"));
-		setName(json.getString("Name"));
-		JSONArray managersJSON = json.getJSONArray("Managers");
+		setCommunityID(json.getInt(COMMUNITY_ID));
+		setName(json.getString(COMMUNITY_NAME));
+		JSONArray managersJSON = json.getJSONArray(Manager.MANAGER_LIST);
 		for (int i = 0; i < managersJSON.length(); i++) {
 			JSONObject managerJSON = new JSONObject(managersJSON.get(i).toString());
 			Manager manager = new Manager(managerJSON,name);
 			addManager(manager);
 		}
-		setMarket(new Market(json.getJSONObject("ExchangeMarket")));
+		setMarket(new Market(json.getJSONObject(Market.MARKET)));
+	}
+	
+	@Override
+	public JSONObject toJSON() {
+		JSONObject retval = new JSONObject();
+		retval.put(COMMUNITY_ID, communityID);
+		retval.put(COMMUNITY_NAME, name);
+		JSONArray managersJSON = new JSONArray();
+		for (Manager m : managers) {
+			managersJSON.put(m.toJSON());
+		}
+		retval.put(Manager.MANAGER_LIST, managersJSON);
+		retval.put(Market.MARKET, market.toJSON());
+		return retval;
 	}
 
 	public void findeUsersManager(String userName) {
@@ -104,20 +121,6 @@ public class Community extends Sendable {
 
 	public void setMarket(Market market) {
 		this.market = market;
-	}
-
-	@Override
-	public JSONObject toJSON() {
-		JSONObject retval = new JSONObject();
-		retval.put("ID", communityID);
-		retval.put("Name", name);
-		JSONArray managersJSON = new JSONArray();
-		for (Manager m : managers) {
-			managersJSON.put(m.toJSON());
-		}
-		retval.put("Managers", managersJSON);
-		retval.put("ExchangeMarket", market.toJSON());
-		return retval;
 	}
 
 }

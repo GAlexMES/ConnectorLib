@@ -2,7 +2,7 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import org.json.JSONObject;
 
-import de.szut.dqi12.cheftrainer.connectorlib.messageids.AdditionalMessageIDs;
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
 /**
  * The user class saves all information about the user, who has been logged in at the client.
@@ -27,16 +27,16 @@ public class User {
 		firstName = json.getString(FIRST_NAME);
 		lastName = json.getString(LAST_NAME);
 		eMail = json.getString(E_MAIL);
-		userName = json.getString(AdditionalMessageIDs.LOGIN);
-		password = json.getString(AdditionalMessageIDs.PASSWORD);
+		userName = json.getString(MIDs.LOGIN);
+		password = json.getString(MIDs.PASSWORD);
 	}
 	public JSONObject toJSON(){
 		JSONObject retval = new JSONObject();
 		retval.put(FIRST_NAME, firstName);
 		retval.put(LAST_NAME, lastName);
 		retval.put(E_MAIL, eMail);
-		retval.put(AdditionalMessageIDs.PASSWORD, password);
-		retval.put(AdditionalMessageIDs.LOGIN, userName);
+		retval.put(MIDs.PASSWORD, password);
+		retval.put(MIDs.LOGIN, userName);
 		return retval;
 	}
 	public String getFirstName() {

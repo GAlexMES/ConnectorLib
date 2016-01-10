@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
+
 /**
  * 
  * @author Robin
@@ -78,22 +80,22 @@ public class Transaction extends Sendable {
 	public void setManagerID(int managerID) {
 		this.managerID = managerID;
 	}
-	
+//	
 	public Transaction(JSONObject json){
-		offeredPrice = json.getInt("Preis");
-		playerSportalID = json.getInt("SportalID");
-		communityID = json.getInt("SpielrundenID");
-		userID = json.getInt("UserID");
-		managerID = json.getInt("ManagerID");
+		offeredPrice = json.getInt(Player.PRICE);
+		playerSportalID = json.getInt(Player.SPORTAL_ID);
+		communityID = json.getInt(Community.COMMUNITY_ID);
+		userID = json.getInt(MIDs.USER_ID);
+		managerID = json.getInt(Manager.MANAGER_ID);
 	}
 	
 	public JSONObject toJSON(){
 		JSONObject retval = new JSONObject();
-		retval.put("Preis", offeredPrice);
-		retval.put("SportalID",  playerSportalID);
-		retval.put("SpielrundenID", communityID);
-		retval.put("UserID", userID);
-		retval.put("ManagerID", managerID);
+		retval.put(Player.PRICE, offeredPrice);
+		retval.put(Player.SPORTAL_ID,  playerSportalID);
+		retval.put(Community.COMMUNITY_ID, communityID);
+		retval.put(MIDs.USER_ID, userID);
+		retval.put(Manager.MANAGER_ID, managerID);
 		return retval;
 	}
 
