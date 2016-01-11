@@ -20,7 +20,6 @@ public class Player extends Sendable {
 	public static final String PRICE = "price";
 	public static final String SPORTAL_ID = "sportalID";
 	public static final String NUMBER= "playerNumber";
-	public static final String POINTS = "playerPoints";
 	public static final String WORTH = "playerWorth";
 	public static final String IS_PLAYING = "isPlaying";
 	public static final String IMG_URL = "pictureURL";
@@ -231,7 +230,7 @@ public class Player extends Sendable {
 		retval.put(PLAYER_NAME, getDefault(this.getName()));
 		retval.put(MIDs.ID, getDefault(this.getID()));
 		retval.put(NUMBER, getDefault(this.getNumber()));
-		retval.put(POINTS, getDefault(this.getPoints()));
+		retval.put(MIDs.POINTS, getDefault(this.getPoints()));
 		retval.put(WORTH, getDefault(this.getWorth()));
 		retval.put(Position.POSITION, getDefault(this.getPosition()));
 		retval.put(RealTeam.TEAM, getDefault(this.getTeamName()));
@@ -246,7 +245,7 @@ public class Player extends Sendable {
 		this.setName(playerJSON.getString(PLAYER_NAME));
 		this.setID(playerJSON.getInt(MIDs.ID));
 		this.setNumber(playerJSON.getInt(NUMBER));
-		this.setPoints(playerJSON.getInt(POINTS));
+		this.setPoints(playerJSON.getInt(MIDs.POINTS));
 		this.setWorth(playerJSON.getInt(WORTH));
 		this.setPosition(playerJSON.getString(Position.POSITION));
 		this.setTeamName(playerJSON.getString(RealTeam.TEAM));

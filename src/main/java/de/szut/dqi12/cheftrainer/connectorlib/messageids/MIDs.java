@@ -8,6 +8,7 @@ public class MIDs {
 	public static final String CREATION = "creation";
 	public static final String ENTER = "enter";
 	
+	public static final String CREATED = "created";
 	public static final String AUTHENTIFICATION_TYPE = "authentificationType";
 	public static final String AUTHENTIFICATE = "authentificate";
 	public static final String REGISTRATION = "registration";
@@ -31,8 +32,11 @@ public class MIDs {
 	
 	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
+	public static final String CORRECT_PASSWORD="correctPassword";
 	public static final String EMAIL_EXISTS = "existEMail";
 	public static final String USER_EXISTS = "userExist";
+	public static final String COMMUNITY_EXISTS = "existCommunity";
+	public static final String MANAGER_CREATED = "managerCreated";
 	
 	public static final String SUCCESFULL = "successful";
 	
@@ -44,6 +48,8 @@ public class MIDs {
 	public static final String USER_ID = "UserID";
 	
 	public static final String ID = "id";
+	
+	public static final String POINTS = "points";
 	
 	
 }

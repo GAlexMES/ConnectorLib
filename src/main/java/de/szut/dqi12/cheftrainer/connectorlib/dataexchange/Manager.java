@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -18,6 +19,11 @@ public class Manager extends Sendable{
 	
 	public static final String MANAGER_ID = "managerID";
 	public static final String MANAGER_LIST = "managerList";
+	public static final String POINTS = "points";
+	public static final String MONEY ="money";
+	public static final String NAME ="name";
+	public static final String FORMATION ="formation";
+	
 
 	private int id;
 	private String name;
@@ -59,11 +65,11 @@ public class Manager extends Sendable{
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
 
-		this.name = managerJSON.getString("Name");
-		this.points = managerJSON.getInt("Points");
-		this.setID(managerJSON.getInt("ID"));
+		this.name = managerJSON.getString(NAME);
+		this.points = managerJSON.getInt(MIDs.POINTS);
+		this.setID(managerJSON.getInt(MIDs.ID));
 
-		JSONArray managersTeam = managerJSON.getJSONArray("Team");
+		JSONArray managersTeam = managerJSON.getJSONArray(RealTeam.TEAM);
 		teamWorth = 0;
 		for (int m = 0; m < managersTeam.length(); m++) {
 			JSONObject playerJSON = managersTeam.getJSONObject(m);
@@ -75,7 +81,7 @@ public class Manager extends Sendable{
 			teamWorth = teamWorth + tempPlayer.getWorth();
 		}
 
-		JSONObject formationJSON = managerJSON.getJSONObject("Formation");
+		JSONObject formationJSON = managerJSON.getJSONObject(FORMATION);
 		this.setFormation(new Formation(formationJSON));
 
 		communityNameProperty = new SimpleStringProperty(communityName);
@@ -85,12 +91,12 @@ public class Manager extends Sendable{
 
 	public JSONObject toJSON() {
 		JSONObject managerJSON = new JSONObject();
-		managerJSON.put("Points", this.getPoints());
-		managerJSON.put("Money", this.getMoney());
-		managerJSON.put("Name", this.getName());
-		managerJSON.put("ID", this.getID());
-		managerJSON.put("Team", teamToJson(this.getPlayers()));
-		managerJSON.put("Formation", this.getFormation().toJSON());
+		managerJSON.put(MIDs.POINTS, this.getPoints());
+		managerJSON.put(MONEY, this.getMoney());
+		managerJSON.put(NAME, this.getName());
+		managerJSON.put(MIDs.ID, this.getID());
+		managerJSON.put(RealTeam.TEAM, teamToJson(this.getPlayers()));
+		managerJSON.put(FORMATION, this.getFormation().toJSON());
 		return managerJSON;
 	}
 
