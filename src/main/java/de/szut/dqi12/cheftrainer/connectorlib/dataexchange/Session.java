@@ -28,8 +28,6 @@ public class Session {
 
 	private ObservableList<Manager> managerTableData = FXCollections
 			.observableArrayList();
-	private ObservableList<MarketPlayer> transferMarketTableData = FXCollections
-			.observableArrayList();
 
 	private HashMap<Integer, Community> communityIDMap;
 	private HashMap<String, Community> communityNameMap;
@@ -50,13 +48,9 @@ public class Session {
 		Community currentCommunity = communityNameMap.get(communityName);
 		currentCommunityID = currentCommunity.getCommunityID();
 
-		transferMarketTableData = FXCollections.observableArrayList();
 		Market market = currentCommunity.getMarket();
 		if (market != null) {
 			List<Player> playerList = market.getPlayers();
-			for (Player p : playerList) {
-				transferMarketTableData.add(p.getMarketPlayer());
-			}
 		}
 	}
 
@@ -170,9 +164,6 @@ public class Session {
 		return managerTableData;
 	}
 
-	public ObservableList<MarketPlayer> getMarketPlayerObservable() {
-		return transferMarketTableData;
-	}
 
 	/**
 	 * Should only be used on the server side.

@@ -64,6 +64,21 @@ public class Market extends Sendable{
 		this.transactionList=transactions;
 	}
 	
+	public void removeTransactions(Transaction transaction){
+		Player p  = playerMap.get(transaction.getPlayerSportalID());
+		players.remove(p);
+		playerMap.remove(transaction.getPlayerSportalID());
+		
+		for(int i = 0; i<transactionList.size();i++){
+			Transaction t = transactionList.get(i);
+			if(t.getPlayerSportalID() == transaction.getPlayerSportalID()){
+				transactionList.remove(i);
+				break;
+			}
+		}
+		
+	}
+	
 	public List<Transaction> getTransactions(){
 		return this.transactionList;
 	}

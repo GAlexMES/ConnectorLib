@@ -41,6 +41,7 @@ public class Player extends Sendable {
 	private String absolutePictureURL;
 	private int sportalID;
 	private Date birthdate;
+	private boolean isOnMarket;
 
 	private MarketPlayer marketPlayer;
 
@@ -284,4 +285,13 @@ public class Player extends Sendable {
 		return marketPlayer;
 	}
 
+	public boolean isOnMarket() {
+		return isOnMarket;
+	}
+
+	public void setOnMarket(boolean isOnMarket) {
+		this.isOnMarket = isOnMarket;
+	}
+
+	
 }

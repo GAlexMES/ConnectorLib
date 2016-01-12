@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Message {
 	
 	private String messageID;
-	private String messageContent;
+	protected String messageContent;
 	
 	public Message(String messageID){
 		this.messageID=messageID;
@@ -44,5 +44,4 @@ public class Message {
 	public void setMessageContent(JSONObject jsonObject) {
 		this.messageContent = jsonObject.toString();
 	}
-	
 }

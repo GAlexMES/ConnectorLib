@@ -22,9 +22,6 @@ public class MIDs {
 	public static final String UPDATE_TYPE = "updateType";
 	public static final String UPDATE_MESSAGE = "updateMessage";
 	
-	public static final String TRANSACTION = "Transaction";
-	public static final String TRANSACTIONS = "transactions";
-	
 	public static final String COMMUNITY = "community";
 	public static final String COMMUNITY_NAME = "communityName";
 	public static final String COMMUNITY_ID ="community_id";
@@ -39,8 +36,11 @@ public class MIDs {
 	public static final String MANAGER_CREATED = "managerCreated";
 	
 	public static final String SUCCESFULL = "successful";
-	
+
 	public static final String NEW_OFFER = "NewOffer";
+	public static final String NEW_MARKET_PLAYER = "newMarketPlayer";
+	public static final String TRANSACTION = "Transaction";
+	public static final String TRANSACTIONS = "transactions";
 	
 	public static final String ACCEPT = "accept";
 	public static final String REMOVE = "remove";
