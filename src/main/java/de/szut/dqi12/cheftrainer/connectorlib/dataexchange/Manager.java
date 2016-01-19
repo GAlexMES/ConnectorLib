@@ -2,12 +2,14 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javafx.beans.property.SimpleStringProperty;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
-import javafx.beans.property.SimpleStringProperty;
 
 /**
  * The Manager class stores all information about an {@link User}s manager in one {@link Community}.
@@ -36,6 +38,7 @@ public class Manager extends Sendable{
 	private int rang;
 	private List<Transaction> transactions;
 	private Market market;
+	private Map<Integer, Integer> history;
 
 	private final SimpleStringProperty communityNameProperty;
 	private final SimpleStringProperty teamWorthProperty;
@@ -55,6 +58,14 @@ public class Manager extends Sendable{
 		this.rang = rang;
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
+	}
+	
+	public Map<Integer, Integer> getHistory(){
+		return history;
+	}
+	
+	public void setHistory(Map<Integer, Integer> history){
+		this.history = history;
 	}
 
 	public Manager(JSONObject managerJSON) {
