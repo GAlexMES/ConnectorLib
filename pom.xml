@@ -4,7 +4,7 @@
 
 	<groupId>de.szut.dqi12.cheftrainer</groupId>
 	<artifactId>ConnectorLib</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>ConnectorLib</name>
