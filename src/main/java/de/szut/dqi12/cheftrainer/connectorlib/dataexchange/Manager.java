@@ -35,6 +35,7 @@ public class Manager extends Sendable{
 	private List<Player> lineUp;
 	private Formation formation;
 	private int points;
+	@SuppressWarnings("unused")
 	private int rang;
 	private List<Transaction> transactions;
 	private Market market;

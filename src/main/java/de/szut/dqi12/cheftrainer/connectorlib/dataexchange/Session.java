@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import de.szut.dqi12.cheftrainer.connectorlib.clientside.Client;
 import de.szut.dqi12.cheftrainer.connectorlib.serverside.ClientHandler;
+import de.szut.dqi12.cheftrainer.connectorlib.serverside.Server;
 
 /**
  * This class is used to save session specific attributes. It can be used on
@@ -47,11 +48,6 @@ public class Session {
 				.getValue();
 		Community currentCommunity = communityNameMap.get(communityName);
 		currentCommunityID = currentCommunity.getCommunityID();
-
-		Market market = currentCommunity.getMarket();
-		if (market != null) {
-			List<Player> playerList = market.getPlayers();
-		}
 	}
 
 	public void setCurrentManager(int currentManager) {
@@ -129,8 +125,7 @@ public class Session {
 
 	/**
 	 * Should only be used on the client side.
-	 * 
-	 * @return
+	 * @param clientSocket a {@link Client} object, which is used to send a message to the {@link Server}.
 	 */
 	public void setClientSocket(Client clientSocket) {
 		this.clientSocket = clientSocket;
@@ -176,8 +171,7 @@ public class Session {
 
 	/**
 	 * Should only be used on the server side.
-	 * 
-	 * @return
+	 * @param clientHandler  a {@link ClientHandler} object, which is used to send messages to the {@link Server}
 	 */
 	public void setClientHandler(ClientHandler clientHandler) {
 		this.clientHandler = clientHandler;

@@ -29,7 +29,7 @@ public class Server implements Runnable {
 
 	/**
 	 * Constructor. Generates a new RSA KeyPair.
-	 * @param serverInterface
+	 * @param serverProps a fully filled {@link ServerProperties} object.
 	 */
 	public Server(ServerProperties serverProps) {
 		this.serverProps = serverProps;

@@ -21,7 +21,9 @@ public class Client {
 	private final static Logger LOGGER = Logger.getLogger(Client.class);
 	/**
 	 * Constructor
+	 * @param clientProps 
 	 * @param conInterface
+	 * @throws IOException 
 	 */
 	public Client(ClientProperties clientProps) throws IOException{
 		this.clientProps = clientProps;
@@ -32,6 +34,10 @@ public class Client {
 
 	/**
 	 * Builds a new Connection to a java server socket
+	 * @param serverIP the IP of the server
+	 * @param serverPort the port of the server
+	 * @param cdl a {@link ConnectionDiedListener}
+	 * @throws IOException 
 	 */
 	private void startConnection(String serverIP, int serverPort, ConnectionDiedListener cdl) throws IOException {
 		try {

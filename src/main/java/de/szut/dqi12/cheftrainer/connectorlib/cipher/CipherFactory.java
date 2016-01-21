@@ -54,8 +54,7 @@ public class CipherFactory {
 	 * @param os
 	 *            the output stream that should be encrypted
 	 * @return and encrypted output stream
-	 * @exception throws NoSuchAlgorithm, NoSuchPadding or InvalidKeyException.
-	 *            All three comes from the Cipher Class
+	 * @throws Exception 
 	 */
 	public OutputStream encryptOutputStream(OutputStream os) throws Exception {
 		// encode stream with RSA
@@ -72,8 +71,7 @@ public class CipherFactory {
 	 * @param is
 	 *            the InputStream, that should be decrypted
 	 * @return an decrypted InputStream
-	 * @exception throws NoSuchAlgorithm, NoSuchPadding or InvalidKeyException.
-	 *            All three comes from the Cipher Class
+	 * @throws Exception 
 	 */
 	public InputStream decryptInputStream(InputStream is) throws Exception {
 		Cipher cipher = Cipher.getInstance(algorithm);
@@ -88,8 +86,7 @@ public class CipherFactory {
 	 * @param text
 	 *            the text, that should be encrypted
 	 * @return the input paramater encrypted
-	 * @exception throws NoSuchAlgorithm, NoSuchPadding or InvalidKeyException.
-	 *            All three comes from the Cipher Class
+	 * @throws Exception 
 	 */
 	public String encrypt(String text) throws Exception {
 		Cipher cipher;

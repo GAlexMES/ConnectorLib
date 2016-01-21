@@ -32,7 +32,10 @@ public class ServerHandler implements Runnable {
 	/**
 	 * Constructor
 	 * 
-	 * @param socket
+	 * @param socket a valid {@link Socket}, which will be opened
+	 * @param clientProps a fully filled {@link ClientProperties} object
+	 * @param cdl a {@link ConnectionDiedListener} object
+	 * @throws Exception 
 	 */
 	public ServerHandler(Socket socket, ClientProperties clientProps, ConnectionDiedListener cdl)
 			throws Exception {
