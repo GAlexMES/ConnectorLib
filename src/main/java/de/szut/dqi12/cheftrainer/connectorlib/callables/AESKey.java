@@ -64,6 +64,8 @@ public class AESKey extends CallableAbstract {
 	 * 
 	 * @param key
 	 *            the AES key, which is encrypted with the public rsa key.
+	 * @return a new SecretKey object, which is a symetric AES key
+	 * @throws Exception 
 	 */
 	private SecretKey readAESKey(String key) throws Exception {
 		String aesKey = cipherFactory.decrypt(key);

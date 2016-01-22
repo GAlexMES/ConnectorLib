@@ -66,6 +66,7 @@ public class RSAPublicKey extends CallableAbstract {
 	/**
 	 * Generates a symmetric key for AES cipher. Encrypts the symmetric key with given RSA Key and sent the encrypted symmetric key back to the server.
 	 * @param rsaPublicKey
+	 * @return a new SecretKey object, which is a symmetric AES Key
 	 */
 	private SecretKey sendSymmetricKey(PublicKey rsaPublicKey) {
 		cipherFactory = new CipherFactory(rsaPublicKey, "RSA");
