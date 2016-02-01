@@ -1,13 +1,20 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javafx.beans.property.SimpleStringProperty;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
@@ -25,6 +32,8 @@ public class Manager extends Sendable{
 	public static final String MONEY ="money";
 	public static final String NAME ="name";
 	public static final String FORMATION ="formation";
+	public static final String STATS ="statistics";
+	public static final String PLACE ="place";
 	
 
 	private int id;
@@ -35,8 +44,7 @@ public class Manager extends Sendable{
 	private List<Player> lineUp;
 	private Formation formation;
 	private int points;
-	@SuppressWarnings("unused")
-	private int rang;
+	private int place;
 	private List<Transaction> transactions;
 	private Market market;
 	private Map<Integer, Integer> history;
@@ -45,18 +53,21 @@ public class Manager extends Sendable{
 	private final SimpleStringProperty teamWorthProperty;
 	private final SimpleStringProperty rangProperty;
 
+	/**
+	 * Default Constructor, creates an empty object.
+	 */
 	public Manager() {
 		this(null, 0, 0, null);
 	}
 
-	public Manager(String managerName, Integer teamWorth, Integer rang, String communityName) {
+	public Manager(String managerName, Integer teamWorth, Integer place, String communityName) {
 		communityNameProperty = new SimpleStringProperty(communityName);
 		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
-		rangProperty = new SimpleStringProperty(String.valueOf(rang));
+		rangProperty = new SimpleStringProperty(String.valueOf(place));
 
 		this.name = managerName;
 		this.teamWorth = teamWorth;
-		this.rang = rang;
+		this.place = place;
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
 	}
@@ -95,10 +106,21 @@ public class Manager extends Sendable{
 
 		JSONObject formationJSON = managerJSON.getJSONObject(FORMATION);
 		this.setFormation(new Formation(formationJSON));
-
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		TypeReference<Map<Integer, Integer>> typeRef = new TypeReference<Map<Integer, Integer>>(){};
+		Map<Integer, Integer> jsonHistory;
+		try {
+			jsonHistory = objectMapper.readValue(managerJSON.getJSONObject(STATS).toString(),typeRef);
+			this.setHistory(jsonHistory);
+		} catch (JSONException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		place = managerJSON.getInt(PLACE);
 		communityNameProperty = new SimpleStringProperty(communityName);
 		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
-		rangProperty = new SimpleStringProperty(String.valueOf(0));
+		rangProperty = new SimpleStringProperty(String.valueOf(place));
 	}
 
 	public JSONObject toJSON() {
@@ -109,6 +131,18 @@ public class Manager extends Sendable{
 		managerJSON.put(MIDs.ID, this.getID());
 		managerJSON.put(RealTeam.TEAM, teamToJson(this.getPlayers()));
 		managerJSON.put(FORMATION, this.getFormation().toJSON());
+		managerJSON.put(PLACE, place);
+		
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			String stats = objectMapper.writeValueAsString(history);
+			managerJSON.put(STATS,new JSONObject(stats));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return managerJSON;
 	}
 

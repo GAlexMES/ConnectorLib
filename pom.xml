@@ -4,7 +4,7 @@
 
 	<groupId>de.szut.dqi12.cheftrainer</groupId>
 	<artifactId>ConnectorLib</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<packaging>jar</packaging>
 
 	<name>ConnectorLib</name>
@@ -36,6 +36,11 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20141113</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
