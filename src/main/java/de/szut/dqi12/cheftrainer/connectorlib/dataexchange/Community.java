@@ -9,9 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * 
+ * The Community Model class, which saves all necessary for a {@link Community}.
  * @author Robin
- *
  */
 public class Community extends Sendable {
 	
@@ -57,6 +56,10 @@ public class Community extends Sendable {
 		return retval;
 	}
 
+	/**
+	 * This function sets the userManager variable to the {@link Manager} object, which will be found by the the given UserName in this Community
+	 * @param userName the Name of the {@link User}, who ownes the {@link Manager}
+	 */
 	public void findeUsersManager(String userName) {
 		for (Integer i : managerDictionary.keySet()) {
 			if (managerDictionary.get(i).getName().equals(userName)) {
@@ -66,6 +69,8 @@ public class Community extends Sendable {
 		}
 	}
 
+	// GETTER AND SETTER
+	
 	public Community(Market market) {
 		this();
 		this.market = market;

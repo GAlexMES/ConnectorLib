@@ -138,6 +138,13 @@ public class CipherFactory {
 		return new String(cipherData);
 	}
 
+	/**
+	 * This function creates a MD5 hash for the given String
+	 * @param message the String that should be hashed
+	 * @return the hashed String
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
 	public static String getMD5(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest mg;
 		try {

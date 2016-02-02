@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 public class MarketPlayer {
 	private final StringProperty playerName;
 	private final StringProperty points;
-	private final StringProperty werth;
+	private final StringProperty worth;
 	private final Player player;
 
 	public MarketPlayer(String playerName, String points,
@@ -14,7 +14,7 @@ public class MarketPlayer {
 		super();
 		this.playerName =  new SimpleStringProperty(playerName);
 		this.points =  new SimpleStringProperty(points);
-		this.werth =  new SimpleStringProperty(price);
+		this.worth =  new SimpleStringProperty(price);
 		this.player=p;
 	}
 
@@ -26,8 +26,8 @@ public class MarketPlayer {
 		return points;
 	}
 
-	public StringProperty getWerth() {
-		return werth;
+	public StringProperty getWorth() {
+		return worth;
 	}
 	
 	public Player getPlayer(){

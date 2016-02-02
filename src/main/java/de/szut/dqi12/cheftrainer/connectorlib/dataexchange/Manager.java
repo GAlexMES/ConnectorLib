@@ -262,4 +262,9 @@ public class Manager extends Sendable{
 	public void setMarket(Market market) {
 		this.market = market;
 	}
+	
+	public void setPoints(int points){
+		this.points=points;
+	}
+	
 }

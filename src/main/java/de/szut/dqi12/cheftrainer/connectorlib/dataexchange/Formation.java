@@ -2,6 +2,11 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
 import org.json.JSONObject;
 
+/**
+ * The Formation class is used to represent the Formation of a {@link Manager}. 
+ * @author Alexander Brennecke
+ *
+ */
 public class Formation extends Sendable{
 	
 	private int defenders;
@@ -9,36 +14,18 @@ public class Formation extends Sendable{
 	private int offensives;
 	private String name;
 	
+/**
+ * 
+ * @param name
+ * @param defenders
+ * @param middfielders
+ * @param offensives
+ */
 	public Formation(String name, int defenders, int middfielders, int offensives){
 		this.name = name;
 		this.defenders = defenders;
 		this.middfielders = middfielders;
 		this.offensives = offensives;
-	}
-	
-	public int getDefenders() {
-		return defenders;
-	}
-	public void setDefenders(int defenders) {
-		this.defenders = defenders;
-	}
-	public int getMiddfielders() {
-		return middfielders;
-	}
-	public void setMiddfielders(int middfielders) {
-		this.middfielders = middfielders;
-	}
-	public int getOffensives() {
-		return offensives;
-	}
-	public void setOffensives(int offensives) {
-		this.offensives = offensives;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public int getPlayersForPosition(String position){
@@ -69,5 +56,30 @@ public class Formation extends Sendable{
 		retval.put(Position.MIDDLE, middfielders);
 		retval.put(Position.OFFENCE, offensives);
 		return retval;
+	}
+	
+	public int getDefenders() {
+		return defenders;
+	}
+	public void setDefenders(int defenders) {
+		this.defenders = defenders;
+	}
+	public int getMiddfielders() {
+		return middfielders;
+	}
+	public void setMiddfielders(int middfielders) {
+		this.middfielders = middfielders;
+	}
+	public int getOffensives() {
+		return offensives;
+	}
+	public void setOffensives(int offensives) {
+		this.offensives = offensives;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

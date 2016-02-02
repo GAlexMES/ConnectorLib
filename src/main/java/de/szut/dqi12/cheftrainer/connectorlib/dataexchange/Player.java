@@ -24,6 +24,7 @@ public class Player extends Sendable {
 	public static final String IS_PLAYING = "isPlaying";
 	public static final String IMG_URL = "pictureURL";
 	public static final String BIRTHDAY ="birthday";
+	public static final String PLAYER_NAME ="playerName";
 	
 	
 	private int worth;
@@ -80,6 +81,67 @@ public class Player extends Sendable {
 		this.name = name;
 		this.points = points;
 		sportalID = 0;
+	}
+	
+	public String getBirthdateString() {
+		String retval = "";
+		try {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(birthdate);
+			retval = retval + cal.get(Calendar.DAY_OF_MONTH) + ".";
+			retval = retval + cal.get(Calendar.MONTH) + ".";
+			retval = retval + cal.get(Calendar.YEAR);
+			return retval;
+		} catch (NullPointerException npe) {
+			return "";
+		}
+	}
+
+	public void setBirthdate(String birthday) {
+		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+");
+		Matcher m = p.matcher(birthday);
+		boolean correctBirthday = m.matches();
+
+		if (correctBirthday) {
+			String[] splittedBirthday = birthday.split("\\.");
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.YEAR, Integer.valueOf(splittedBirthday[2]));
+			cal.set(Calendar.MONTH, Integer.valueOf(splittedBirthday[1]));
+			cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(splittedBirthday[0]));
+			this.birthdate = cal.getTime();
+		}
+	}
+
+	@Override
+	public JSONObject toJSON() {
+		JSONObject retval = new JSONObject();
+		retval.put(PLAYER_NAME, getDefault(this.getName()));
+		retval.put(MIDs.ID, getDefault(this.getID()));
+		retval.put(NUMBER, getDefault(this.getNumber()));
+		retval.put(MIDs.POINTS, getDefault(this.getPoints()));
+		retval.put(WORTH, getDefault(this.getWorth()));
+		retval.put(Position.POSITION, getDefault(this.getPosition()));
+		retval.put(RealTeam.TEAM, getDefault(this.getTeamName()));
+		retval.put(IS_PLAYING, getDefault(this.plays()));
+		retval.put(IMG_URL, getDefault(this.getAbsolutePictureURL()));
+		retval.put(SPORTAL_ID, getDefault(this.getSportalID()));
+		retval.put(BIRTHDAY, getDefault(this.getBirthdateString()));
+		return retval;
+	}
+
+	public void getPlayerFromJSON(JSONObject playerJSON) {
+		this.setName(playerJSON.getString(PLAYER_NAME));
+		this.setID(playerJSON.getInt(MIDs.ID));
+		this.setNumber(playerJSON.getInt(NUMBER));
+		this.setPoints(playerJSON.getInt(MIDs.POINTS));
+		this.setWorth(playerJSON.getInt(WORTH));
+		this.setPosition(playerJSON.getString(Position.POSITION));
+		this.setTeamName(playerJSON.getString(RealTeam.TEAM));
+		this.setPlays(playerJSON.getBoolean(IS_PLAYING));
+		this.setAbsolutePictureURL(playerJSON.getString(IMG_URL));
+		this.setSportalID(playerJSON.getInt(SPORTAL_ID));
+		this.setBirthdate(playerJSON.getString(BIRTHDAY));
+		marketPlayer = new MarketPlayer(name, String.valueOf(points),String.valueOf(worth + " €"), this);
 	}
 
 	public String getTeamName() {
@@ -192,69 +254,6 @@ public class Player extends Sendable {
 
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
-	}
-
-	public String getBirthdateString() {
-		String retval = "";
-		try {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(birthdate);
-			retval = retval + cal.get(Calendar.DAY_OF_MONTH) + ".";
-			retval = retval + cal.get(Calendar.MONTH) + ".";
-			retval = retval + cal.get(Calendar.YEAR);
-			return retval;
-		} catch (NullPointerException npe) {
-			return "";
-		}
-	}
-
-	public void setBirthdate(String birthday) {
-		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+");
-		Matcher m = p.matcher(birthday);
-		boolean correctBirthday = m.matches();
-
-		if (correctBirthday) {
-			String[] splittedBirthday = birthday.split("\\.");
-			Calendar cal = Calendar.getInstance();
-			cal.set(Calendar.YEAR, Integer.valueOf(splittedBirthday[2]));
-			cal.set(Calendar.MONTH, Integer.valueOf(splittedBirthday[1]));
-			cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(splittedBirthday[0]));
-			this.birthdate = cal.getTime();
-		}
-	}
-
-	public static final String PLAYER_NAME ="playerName";
-	
-	@Override
-	public JSONObject toJSON() {
-		JSONObject retval = new JSONObject();
-		retval.put(PLAYER_NAME, getDefault(this.getName()));
-		retval.put(MIDs.ID, getDefault(this.getID()));
-		retval.put(NUMBER, getDefault(this.getNumber()));
-		retval.put(MIDs.POINTS, getDefault(this.getPoints()));
-		retval.put(WORTH, getDefault(this.getWorth()));
-		retval.put(Position.POSITION, getDefault(this.getPosition()));
-		retval.put(RealTeam.TEAM, getDefault(this.getTeamName()));
-		retval.put(IS_PLAYING, getDefault(this.plays()));
-		retval.put(IMG_URL, getDefault(this.getAbsolutePictureURL()));
-		retval.put(SPORTAL_ID, getDefault(this.getSportalID()));
-		retval.put(BIRTHDAY, getDefault(this.getBirthdateString()));
-		return retval;
-	}
-
-	public void getPlayerFromJSON(JSONObject playerJSON) {
-		this.setName(playerJSON.getString(PLAYER_NAME));
-		this.setID(playerJSON.getInt(MIDs.ID));
-		this.setNumber(playerJSON.getInt(NUMBER));
-		this.setPoints(playerJSON.getInt(MIDs.POINTS));
-		this.setWorth(playerJSON.getInt(WORTH));
-		this.setPosition(playerJSON.getString(Position.POSITION));
-		this.setTeamName(playerJSON.getString(RealTeam.TEAM));
-		this.setPlays(playerJSON.getBoolean(IS_PLAYING));
-		this.setAbsolutePictureURL(playerJSON.getString(IMG_URL));
-		this.setSportalID(playerJSON.getInt(SPORTAL_ID));
-		this.setBirthdate(playerJSON.getString(BIRTHDAY));
-		marketPlayer = new MarketPlayer(name, String.valueOf(points), "no information available", this);
 	}
 
 	private String getDefault(Object o) {
