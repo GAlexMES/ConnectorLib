@@ -29,6 +29,10 @@ public class Community extends Sendable {
 		managerDictionary = new HashMap<Integer, Manager>();
 	}
 
+	/**
+	 * To initialize a {@link Community} via a JSON String.
+	 * @param json the JSONObject, which contains all information for the community.
+	 */
 	public Community(JSONObject json) {
 		this();
 		setCommunityID(json.getInt(COMMUNITY_ID));

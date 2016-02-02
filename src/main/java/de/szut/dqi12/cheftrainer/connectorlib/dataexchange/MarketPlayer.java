@@ -3,6 +3,11 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * This class is used, to present a {@link Player} in a JavaFX Table
+ * @author Alexander Brennecke
+ *
+ */
 public class MarketPlayer {
 	private final StringProperty playerName;
 	private final StringProperty points;

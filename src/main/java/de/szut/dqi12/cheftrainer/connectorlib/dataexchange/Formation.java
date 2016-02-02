@@ -28,6 +28,11 @@ public class Formation extends Sendable{
 		this.offensives = offensives;
 	}
 	
+	/**
+	 * This function looks for the number of playing players on the given {@link Position}
+	 * @param position use {@link Position} for this.
+	 * @return a int, which represents the number of {@link Player}s, which play on this {@link Position}.
+	 */
 	public int getPlayersForPosition(String position){
 		switch(position){
 		case Position.DEFENCE:
@@ -39,10 +44,13 @@ public class Formation extends Sendable{
 		case Position.KEEPER:
 			return 1;
 		}
-		
 		return 0;
 	}
 	
+	/**
+	 * Constructor, when the {@link Formation} should be initialized via {@link JSONObject}.
+	 * @param json a {@link JSONObject}, which includes all information, which are required to initialized a {@link JSONObject}
+	 */
 	public Formation(JSONObject json){
 		this.defenders = json.getInt(Position.DEFENCE);
 		this.middfielders = json.getInt(Position.MIDDLE);
@@ -50,6 +58,7 @@ public class Formation extends Sendable{
 		this.name=defenders+"-"+middfielders+"-"+offensives;
 	}
 	
+	@Override
 	public JSONObject toJSON(){
 		JSONObject retval = new JSONObject();
 		retval.put(Position.DEFENCE, defenders);
@@ -58,6 +67,7 @@ public class Formation extends Sendable{
 		return retval;
 	}
 	
+	// GETTER AND SETTER
 	public int getDefenders() {
 		return defenders;
 	}

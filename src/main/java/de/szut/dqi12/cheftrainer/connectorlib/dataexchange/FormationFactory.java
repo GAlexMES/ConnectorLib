@@ -5,6 +5,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class transforms a Position String to a {@link Formation} object.
+ * @author Alexander Brennecke
+ *
+ */
 public class FormationFactory {
 
 	public static final String FOUR_FOUR_TWO = "4-4-2";
@@ -12,17 +17,34 @@ public class FormationFactory {
 	
 	private List<String> formationsList;
 	
+	/**
+	 * Constructor
+	 */
 	public FormationFactory(){
 		formationsList = new ArrayList<>();
 		createFormationList();
 	}
 
+	/**
+	 * This function creates a Formation object, based n the given String.
+	 * @param formation should be in the format "4-4-2"
+	 * @return a {@link Formation} object.
+	 */
 	public Formation getFormation(String formation) {
+		
 		String[] sF = formation.split("-");
 		return new Formation(formation, Integer.valueOf(sF[0]),
 				Integer.valueOf(sF[1]), Integer.valueOf(sF[2]));
 	}
 	
+	/**
+	 * This function creates a {@link Formation} object, based on the given ints.
+	 * @param defendersn number of defenders
+	 * @param middfielders number of middfielders
+	 * @param offensives number of offensives
+	 * @return the generated {@link Formation} object.
+	 * @throws IOException
+	 */
 	public Formation getFormation(int defenders, int middfielders,
 			int offensives) throws IOException{
 		String formationName = defenders+"-"+middfielders+"-"+offensives;
@@ -34,6 +56,9 @@ public class FormationFactory {
 		}
 	}
 	
+	/**
+	 * This function creates a {@link List} of {@link Formation} objects, based on the static final Strings, which are defined in this class.
+	 */
 	public void createFormationList(){
 		Field[] formations = FormationFactory.class.getFields();
 		for (Field f : formations) {
@@ -49,6 +74,7 @@ public class FormationFactory {
 		}
 	}
 
+	// GETTER AND SETTER
 	public List<String> getFormationsList() {
 		return formationsList;
 	}

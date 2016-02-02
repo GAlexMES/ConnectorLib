@@ -46,15 +46,29 @@ public class Player extends Sendable {
 
 	private MarketPlayer marketPlayer;
 
+	/**
+	 * Deault constructor
+	 */
 	public Player() {
 		sportalID = 0;
 	}
 
+	/**
+	 * This constructor should be used, when the player should be initialized by a {@link JSONObject}
+	 * @param playerJSON the {@link JSONObject}, that contains all necessary information
+	 */
 	public Player(JSONObject playerJSON) {
 		getPlayerFromJSON(playerJSON);
 		marketPlayer = new MarketPlayer(name, String.valueOf(points), String.valueOf(worth), this);
 	}
 
+	/**
+	 * This constructor should be used, when the player should be initialized with the given parameters.
+	 * @param worth the worth of the player
+	 * @param name the name of the player
+	 * @param points the points of the player
+	 * @param position the position of the player (use {@link Position}
+	 */
 	public Player(int worth, String name, int points, String position) {
 		this.worth = worth;
 		this.name = name;
@@ -68,6 +82,12 @@ public class Player extends Sendable {
 		sportalID = 0;
 	}
 
+	/**
+	 * This constructor should be used, when the player should be initialized with the given parameters.
+	 * @param name the name of the player 
+	 * @param teamName the name of the {@link RealTeam}, in which the player plays.
+	 * @param points the points of the player
+	 */
 	public Player(String name, String teamName, int points) {
 		this.name = name;
 		this.points = points;
@@ -77,12 +97,21 @@ public class Player extends Sendable {
 		sportalID = 0;
 	}
 
+	/**
+	 * This constructor should be used, when the player should be initialized with the given parameters.
+	 * @param name the name of the player
+	 * @param points the points of the player
+	 */
 	public Player(String name, int points) {
 		this.name = name;
 		this.points = points;
 		sportalID = 0;
 	}
 	
+	/**
+	 * This function creates a string from the birthday.
+	 * @return a String, which represents the birthday.
+	 */
 	public String getBirthdateString() {
 		String retval = "";
 		try {
@@ -97,6 +126,9 @@ public class Player extends Sendable {
 		}
 	}
 
+	/*
+	 * This function allows to set the birthday of a player by string.
+	 */
 	public void setBirthdate(String birthday) {
 		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+");
 		Matcher m = p.matcher(birthday);
@@ -110,6 +142,25 @@ public class Player extends Sendable {
 			cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(splittedBirthday[0]));
 			this.birthdate = cal.getTime();
 		}
+	}
+	
+	/**
+	 * This function is used, to initialize this player object with the given {@link JSONObject}.
+	 * @param playerJSON a {@link JSONObject}, where all necessary information are set.
+	 */
+	public void getPlayerFromJSON(JSONObject playerJSON) {
+		this.setName(playerJSON.getString(PLAYER_NAME));
+		this.setID(playerJSON.getInt(MIDs.ID));
+		this.setNumber(playerJSON.getInt(NUMBER));
+		this.setPoints(playerJSON.getInt(MIDs.POINTS));
+		this.setWorth(playerJSON.getInt(WORTH));
+		this.setPosition(playerJSON.getString(Position.POSITION));
+		this.setTeamName(playerJSON.getString(RealTeam.TEAM));
+		this.setPlays(playerJSON.getBoolean(IS_PLAYING));
+		this.setAbsolutePictureURL(playerJSON.getString(IMG_URL));
+		this.setSportalID(playerJSON.getInt(SPORTAL_ID));
+		this.setBirthdate(playerJSON.getString(BIRTHDAY));
+		marketPlayer = new MarketPlayer(name, String.valueOf(points),String.valueOf(worth + " €"), this);
 	}
 
 	@Override
@@ -128,21 +179,8 @@ public class Player extends Sendable {
 		retval.put(BIRTHDAY, getDefault(this.getBirthdateString()));
 		return retval;
 	}
-
-	public void getPlayerFromJSON(JSONObject playerJSON) {
-		this.setName(playerJSON.getString(PLAYER_NAME));
-		this.setID(playerJSON.getInt(MIDs.ID));
-		this.setNumber(playerJSON.getInt(NUMBER));
-		this.setPoints(playerJSON.getInt(MIDs.POINTS));
-		this.setWorth(playerJSON.getInt(WORTH));
-		this.setPosition(playerJSON.getString(Position.POSITION));
-		this.setTeamName(playerJSON.getString(RealTeam.TEAM));
-		this.setPlays(playerJSON.getBoolean(IS_PLAYING));
-		this.setAbsolutePictureURL(playerJSON.getString(IMG_URL));
-		this.setSportalID(playerJSON.getInt(SPORTAL_ID));
-		this.setBirthdate(playerJSON.getString(BIRTHDAY));
-		marketPlayer = new MarketPlayer(name, String.valueOf(points),String.valueOf(worth + " €"), this);
-	}
+	
+	//GETTER AND SETTER
 
 	public String getTeamName() {
 		return teamName;

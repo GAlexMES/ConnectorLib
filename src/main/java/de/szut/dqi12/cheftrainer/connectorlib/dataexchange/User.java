@@ -9,7 +9,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
  * @author Alexander Brennecke
  * @custom.position /D0010/
  */
-public class User {
+public class User extends Sendable{
 	
 	public static final String FIRST_NAME = "firstName";
 	public static final String LAST_NAME ="lastName";
@@ -23,6 +23,10 @@ public class User {
 	
 	int userID;
 	
+	/**
+	 * This function is used, when this object should be initialized via a {@link JSONObject}
+	 * @param json a valid {@link JSONObject}, which contains all necessary information to initialize this object
+	 */
 	public void setWithJSON(JSONObject json){
 		firstName = json.getString(FIRST_NAME);
 		lastName = json.getString(LAST_NAME);
@@ -30,6 +34,8 @@ public class User {
 		userName = json.getString(MIDs.LOGIN);
 		password = json.getString(MIDs.PASSWORD);
 	}
+	
+	@Override
 	public JSONObject toJSON(){
 		JSONObject retval = new JSONObject();
 		retval.put(FIRST_NAME, firstName);

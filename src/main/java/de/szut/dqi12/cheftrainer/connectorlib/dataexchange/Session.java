@@ -32,16 +32,39 @@ public class Session {
 
 	private HashMap<Integer, Community> communityIDMap;
 	private HashMap<String, Community> communityNameMap;
-
-	public int getCurrentManagerID() {
-		return currentManagerID;
-	}
 	
-	public Manager getCurrentManager(){
-		Community com = communityIDMap.get(currentCommunityID);
-		return com.getManager(currentManagerID);
+
+	/**
+	 * Default constructor
+	 */
+	public Session() {
+		communityIDMap = new HashMap<>();
+		communityNameMap = new HashMap<>();
 	}
 
+	
+	/**
+	 * Should only be used on the server side.
+	 * 
+	 * @return
+	 */
+	public ClientHandler getClientHandler() {
+		return clientHandler;
+	}
+
+	/**
+	 * Should only be used on the server side.
+	 * @param clientHandler  a {@link ClientHandler} object, which is used to send messages to the {@link Server}
+	 */
+	public void setClientHandler(ClientHandler clientHandler) {
+		this.clientHandler = clientHandler;
+	}
+
+
+	/**
+	 * This function sets the currentManager variable to the given parameter
+	 * @param currentManager a {@link Manager} object, which should be set as currentManager. This {@link Manager} is used for every operation in the ClientApplication.
+	 */
 	public void setCurrentManager(Manager currentManager) {
 		setCurrentManager(currentManager.getID());
 		String communityName = currentManager.getCommunityNameProperty()
@@ -50,40 +73,11 @@ public class Session {
 		currentCommunityID = currentCommunity.getCommunityID();
 	}
 
-	public void setCurrentManager(int currentManager) {
-		this.currentManagerID = currentManager;
-	}
-
-	public int getCurrentCommunityID() {
-		return currentCommunityID;
-	}
-
-	public void setCurrentCommunityID(int currentCommunity) {
-		this.currentCommunityID = currentCommunity;
-	}
-
-	public Session() {
-		communityIDMap = new HashMap<>();
-		communityNameMap = new HashMap<>();
-	}
-
-	public Community getCurrentCommunity() {
-		return communityIDMap.get(currentCommunityID);
-	}
-
-	public Community getCommunity(Integer id) {
-		return communityIDMap.get(id);
-	}
-
-	public Community getCommunity(String name) {
-		return communityNameMap.get(name);
-	}
-
-	public void updateCommunities(List<Community> communities) {
-		communityIDMap = new HashMap<>();
-		addCommunities(communities);
-	}
-
+	
+	/**
+	 * This function is used to add a {@link Community} to the session. It will be displayed in the communiies table in the client.
+	 * @param community a {@link Community} object.
+	 */
 	public void addCommunity(Community community) {
 		communityIDMap.put(community.getCommunityID(), community);
 		communityNameMap.put(community.getName(), community);
@@ -91,27 +85,26 @@ public class Session {
 		addManagerToTable(community.getUsersManager());
 	}
 
+	/**
+	 * This function is used to add multiple {@link Community} objects.
+	 * @param communities
+	 */
 	public void addCommunities(List<Community> communities) {
 		for (Community c : communities) {
 			addCommunity(c);
 		}
 	}
 
+	/**
+	 * This function is used to add an {@link Manager} object to the {@link Manager} observable list, which will be used by the community controler, to display the manager in the table.
+	 * @param managers
+	 */
 	public void addManagerToTable(Manager... managers) {
 		for (Manager m : managers) {
 			if (m != null) {
 				managerTableData.add(m);
 			}
 		}
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		userID = user.getUserID();
-		this.user = user;
 	}
 
 	/**
@@ -130,6 +123,8 @@ public class Session {
 	public void setClientSocket(Client clientSocket) {
 		this.clientSocket = clientSocket;
 	}
+	
+	//GETTER AND SETTER
 
 	public int getUserID() {
 		return userID;
@@ -158,22 +153,52 @@ public class Session {
 	public ObservableList<Manager> getManagerObservable() {
 		return managerTableData;
 	}
-
-
-	/**
-	 * Should only be used on the server side.
-	 * 
-	 * @return
-	 */
-	public ClientHandler getClientHandler() {
-		return clientHandler;
+	
+	public int getCurrentManagerID() {
+		return currentManagerID;
+	}
+	
+	public Manager getCurrentManager(){
+		Community com = communityIDMap.get(currentCommunityID);
+		return com.getManager(currentManagerID);
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
-	/**
-	 * Should only be used on the server side.
-	 * @param clientHandler  a {@link ClientHandler} object, which is used to send messages to the {@link Server}
-	 */
-	public void setClientHandler(ClientHandler clientHandler) {
-		this.clientHandler = clientHandler;
+	public void setUser(User user) {
+		userID = user.getUserID();
+		this.user = user;
 	}
+	
+	public Community getCurrentCommunity() {
+		return communityIDMap.get(currentCommunityID);
+	}
+
+	public Community getCommunity(Integer id) {
+		return communityIDMap.get(id);
+	}
+
+	public Community getCommunity(String name) {
+		return communityNameMap.get(name);
+	}
+
+	public void updateCommunities(List<Community> communities) {
+		communityIDMap = new HashMap<>();
+		addCommunities(communities);
+	}
+	
+	public void setCurrentManager(int currentManager) {
+		this.currentManagerID = currentManager;
+	}
+
+	public int getCurrentCommunityID() {
+		return currentCommunityID;
+	}
+
+	public void setCurrentCommunityID(int currentCommunity) {
+		this.currentCommunityID = currentCommunity;
+	}
+
 }

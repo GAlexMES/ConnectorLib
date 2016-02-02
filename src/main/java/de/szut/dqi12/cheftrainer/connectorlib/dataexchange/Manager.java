@@ -59,7 +59,23 @@ public class Manager extends Sendable{
 	public Manager() {
 		this(null, 0, 0, null);
 	}
+	
+	/**
+	 * This constructor should be used, when the Manager should be initialized by a {@link JSONObject}.
+	 * @param managerJSON the {@link JSONObject}, which includes all neccessary information, to initialize a Manager.
+	 */
+	public Manager(JSONObject managerJSON) {
+		this(managerJSON, "");
+	}
 
+	
+	/**
+	 * Constructor
+	 * @param managerName the name of the manager (should be the name of the {@link User}, who owns him.
+	 * @param teamWorth the worth of the team, which is owned by this manager
+	 * @param place the place in the community
+	 * @param communityName the name of the community, in which this manager plays.
+	 */
 	public Manager(String managerName, Integer teamWorth, Integer place, String communityName) {
 		communityNameProperty = new SimpleStringProperty(communityName);
 		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
@@ -72,18 +88,11 @@ public class Manager extends Sendable{
 		this.lineUp = new ArrayList<Player>();
 	}
 	
-	public Map<Integer, Integer> getHistory(){
-		return history;
-	}
-	
-	public void setHistory(Map<Integer, Integer> history){
-		this.history = history;
-	}
-
-	public Manager(JSONObject managerJSON) {
-		this(managerJSON, "");
-	}
-
+	/**
+	 * This constructor is used, when a manager should be declared by the a {@link JSONObject} and an {@link Community} name
+	 * @param managerJSON the {@link JSONObject} with all necessary information
+	 * @param communityName the name of the {@link Community}, in which this manager should play.
+	 */
 	public Manager(JSONObject managerJSON, String communityName) {
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
@@ -123,6 +132,7 @@ public class Manager extends Sendable{
 		rangProperty = new SimpleStringProperty(String.valueOf(place));
 	}
 
+	@Override
 	public JSONObject toJSON() {
 		JSONObject managerJSON = new JSONObject();
 		managerJSON.put(MIDs.POINTS, this.getPoints());
@@ -144,6 +154,13 @@ public class Manager extends Sendable{
 		
 		
 		return managerJSON;
+	}
+	public Map<Integer, Integer> getHistory(){
+		return history;
+	}
+	
+	public void setHistory(Map<Integer, Integer> history){
+		this.history = history;
 	}
 
 	private static JSONArray teamToJson(List<Player> playerList) {

@@ -1,5 +1,10 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
+/**
+ * This class is the model class for a match.
+ * @author Alexander Brennecke
+ *
+ */
 public class Match {
 	
 	private int matchDay;
@@ -13,6 +18,15 @@ public class Match {
 	private int goalsGuest;
 	private int sportalMatchID;
 	
+	/**
+	 * default constructor
+	 * @param date the start date of the match
+	 * @param time the start time of the match
+	 * @param home the name of the home team
+	 * @param guest the name of the guest team
+	 * @param score the result of the match
+	 * @param detailURL the sportal url of the match
+	 */
 	public Match(String date, String time, String home, String guest,
 			String score, String detailURL) {
 		this.date = date;
