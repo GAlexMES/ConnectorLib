@@ -14,6 +14,8 @@ public class ServerProperties {
 	private int port;
 	private List<IDClass_Path_Mapper> idMappers = new ArrayList<IDClass_Path_Mapper>();
 	
+	// GETTER AND SETTER
+	
 	public int getPort() {
 		return port;
 	}
