@@ -42,9 +42,6 @@ public class MIDs {
 	public static final String TRANSACTION = "Transaction";
 	public static final String TRANSACTIONS = "transactions";
 	
-	public static final String ACCEPT = "accept";
-	public static final String REMOVE = "remove";
-	
 	public static final String USER_ID = "UserID";
 	
 	public static final String ID = "id";

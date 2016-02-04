@@ -160,6 +160,7 @@ public class ClientHandler implements Runnable {
 		server.removeClient(this, Thread.currentThread());
 	}
 
+	// GETTER AND SETTER
 	public Socket getSocket(){
 		return socket;
 	}

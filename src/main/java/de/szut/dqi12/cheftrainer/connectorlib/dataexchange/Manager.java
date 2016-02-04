@@ -19,22 +19,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
 /**
- * The Manager class stores all information about an {@link User}s manager in one {@link Community}.
+ * The Manager class stores all information about an {@link User}s manager in
+ * one {@link Community}.
  * 
  * @author Robin
- * @custom.position /D0030/ 
+ * @custom.position /D0030/
  */
-public class Manager extends Sendable{
-	
+public class Manager extends Sendable {
+
 	public static final String MANAGER_ID = "managerID";
 	public static final String MANAGER_LIST = "managerList";
 	public static final String POINTS = "points";
-	public static final String MONEY ="money";
-	public static final String NAME ="name";
-	public static final String FORMATION ="formation";
-	public static final String STATS ="statistics";
-	public static final String PLACE ="place";
-	
+	public static final String MONEY = "money";
+	public static final String NAME = "name";
+	public static final String FORMATION = "formation";
+	public static final String STATS = "statistics";
+	public static final String PLACE = "place";
 
 	private int id;
 	private String name;
@@ -59,22 +59,31 @@ public class Manager extends Sendable{
 	public Manager() {
 		this(null, 0, 0, null);
 	}
-	
+
 	/**
-	 * This constructor should be used, when the Manager should be initialized by a {@link JSONObject}.
-	 * @param managerJSON the {@link JSONObject}, which includes all neccessary information, to initialize a Manager.
+	 * This constructor should be used, when the Manager should be initialized
+	 * by a {@link JSONObject}.
+	 * 
+	 * @param managerJSON
+	 *            the {@link JSONObject}, which includes all neccessary
+	 *            information, to initialize a Manager.
 	 */
 	public Manager(JSONObject managerJSON) {
 		this(managerJSON, "");
 	}
 
-	
 	/**
 	 * Constructor
-	 * @param managerName the name of the manager (should be the name of the {@link User}, who owns him.
-	 * @param teamWorth the worth of the team, which is owned by this manager
-	 * @param place the place in the community
-	 * @param communityName the name of the community, in which this manager plays.
+	 * 
+	 * @param managerName
+	 *            the name of the manager (should be the name of the
+	 *            {@link User}, who owns him.
+	 * @param teamWorth
+	 *            the worth of the team, which is owned by this manager
+	 * @param place
+	 *            the place in the community
+	 * @param communityName
+	 *            the name of the community, in which this manager plays.
 	 */
 	public Manager(String managerName, Integer teamWorth, Integer place, String communityName) {
 		communityNameProperty = new SimpleStringProperty(communityName);
@@ -87,11 +96,16 @@ public class Manager extends Sendable{
 		this.players = new ArrayList<Player>();
 		this.lineUp = new ArrayList<Player>();
 	}
-	
+
 	/**
-	 * This constructor is used, when a manager should be declared by the a {@link JSONObject} and an {@link Community} name
-	 * @param managerJSON the {@link JSONObject} with all necessary information
-	 * @param communityName the name of the {@link Community}, in which this manager should play.
+	 * This constructor is used, when a manager should be declared by the a
+	 * {@link JSONObject} and an {@link Community} name
+	 * 
+	 * @param managerJSON
+	 *            the {@link JSONObject} with all necessary information
+	 * @param communityName
+	 *            the name of the {@link Community}, in which this manager
+	 *            should play.
 	 */
 	public Manager(JSONObject managerJSON, String communityName) {
 		this.players = new ArrayList<Player>();
@@ -115,17 +129,22 @@ public class Manager extends Sendable{
 
 		JSONObject formationJSON = managerJSON.getJSONObject(FORMATION);
 		this.setFormation(new Formation(formationJSON));
+
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		TypeReference<Map<Integer, Integer>> typeRef = new TypeReference<Map<Integer, Integer>>(){};
-		Map<Integer, Integer> jsonHistory;
 		try {
-			jsonHistory = objectMapper.readValue(managerJSON.getJSONObject(STATS).toString(),typeRef);
-			this.setHistory(jsonHistory);
+			String stats = managerJSON.getJSONObject(STATS).toString();
+			if (!stats.equals("")) {
+				ObjectMapper objectMapper = new ObjectMapper();
+				TypeReference<Map<Integer, Integer>> typeRef = new TypeReference<Map<Integer, Integer>>() {
+				};
+				Map<Integer, Integer> jsonHistory;
+				jsonHistory = objectMapper.readValue(stats, typeRef);
+				this.setHistory(jsonHistory);
+			}
 		} catch (JSONException | IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		place = managerJSON.getInt(PLACE);
 		communityNameProperty = new SimpleStringProperty(communityName);
 		teamWorthProperty = new SimpleStringProperty(teamWorth + "€");
@@ -142,24 +161,26 @@ public class Manager extends Sendable{
 		managerJSON.put(RealTeam.TEAM, teamToJson(this.getPlayers()));
 		managerJSON.put(FORMATION, this.getFormation().toJSON());
 		managerJSON.put(PLACE, place);
-		
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			String stats = objectMapper.writeValueAsString(history);
-			managerJSON.put(STATS,new JSONObject(stats));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		String stats = "{}";
+		if (history != null) {
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				stats = objectMapper.writeValueAsString(history);
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
+		managerJSON.put(STATS, new JSONObject(stats));
+
 		return managerJSON;
 	}
-	public Map<Integer, Integer> getHistory(){
+
+	public Map<Integer, Integer> getHistory() {
 		return history;
 	}
-	
-	public void setHistory(Map<Integer, Integer> history){
+
+	public void setHistory(Map<Integer, Integer> history) {
 		this.history = history;
 	}
 
@@ -227,7 +248,7 @@ public class Manager extends Sendable{
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -279,9 +300,9 @@ public class Manager extends Sendable{
 	public void setMarket(Market market) {
 		this.market = market;
 	}
-	
-	public void setPoints(int points){
-		this.points=points;
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
-	
+
 }

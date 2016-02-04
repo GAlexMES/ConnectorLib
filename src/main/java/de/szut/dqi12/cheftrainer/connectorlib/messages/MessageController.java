@@ -210,6 +210,10 @@ public class MessageController {
 		this.completedHandshake = completedHandshake;
 		LOGGER.info(LoggingMessages.HANDSHAKE_COMPLETED);
 	}
+	
+	public boolean isHandshakeComplete(){
+		return completedHandshake;
+	}
 
 	public void setAESKey(SecretKey aesKey) {
 		cipherFactory = new CipherFactory(aesKey, "AES");

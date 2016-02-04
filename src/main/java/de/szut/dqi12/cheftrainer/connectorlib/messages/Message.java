@@ -36,13 +36,15 @@ public class Message {
 		return messageContent;
 	}
 
+	public void setMessageContent(JSONObject authentificationInfo) {
+		this.messageContent = authentificationInfo.toString();
+	}
+	
 	public void setMessageContent(String messageContent) {
-		this.messageContent = messageContent;
+		this.messageContent=messageContent;
 	}
 
-	public void setMessageContent(JSONObject jsonObject) {
-		this.messageContent = jsonObject.toString();
-	}
+	public void createMessageContent() {}
 
-	public void createMessageContent() {};
+
 }

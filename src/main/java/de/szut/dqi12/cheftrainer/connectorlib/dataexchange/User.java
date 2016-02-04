@@ -1,7 +1,11 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.cipher.CipherFactory;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
 /**
@@ -23,11 +27,11 @@ public class User extends Sendable{
 	
 	int userID;
 	
-	/**
-	 * This function is used, when this object should be initialized via a {@link JSONObject}
-	 * @param json a valid {@link JSONObject}, which contains all necessary information to initialize this object
-	 */
-	public void setWithJSON(JSONObject json){
+	public User(){
+		
+	}
+	
+	public User(JSONObject json){
 		firstName = json.getString(FIRST_NAME);
 		lastName = json.getString(LAST_NAME);
 		eMail = json.getString(E_MAIL);
@@ -35,14 +39,22 @@ public class User extends Sendable{
 		password = json.getString(MIDs.PASSWORD);
 	}
 	
+	
 	@Override
 	public JSONObject toJSON(){
 		JSONObject retval = new JSONObject();
 		retval.put(FIRST_NAME, firstName);
 		retval.put(LAST_NAME, lastName);
 		retval.put(E_MAIL, eMail);
-		retval.put(MIDs.PASSWORD, password);
 		retval.put(MIDs.LOGIN, userName);
+		
+		try {
+			String passwordMD5 = CipherFactory.getMD5(password);
+			retval.put(MIDs.PASSWORD, passwordMD5);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		return retval;
 	}
 	public String getFirstName() {

@@ -2,6 +2,9 @@ package de.szut.dqi12.cheftrainer.connectorlib.clientside;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.log4j.Logger;
 
@@ -57,6 +60,7 @@ public class Client {
 	 * @param message the decrypted message that should be send.
 	 */
 	public void sendMessage(Message message){
+		message.createMessageContent();
 		if(servHandler!=null){
 			servHandler.sendMessage(message);
 		}
@@ -75,6 +79,31 @@ public class Client {
 	
 	public ServerHandler getServerHandler(){
 		return servHandler;
+	}
+	
+	/**
+	 * This function waits for the completion of the handshake.
+	 * @param timeOut the time out in seconds
+	 * @return true ,when the handshake was completed
+	 * @throws TimeoutException
+	 */
+	public boolean waitForConnect (int timeOut) throws TimeoutException{
+		Date current = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(current);
+		cal.add(Calendar.SECOND, timeOut);
+		while(cal.getTime().after(new Date())){
+			boolean handshakeComplete = servHandler.getMessageController().isHandshakeComplete();
+			if(handshakeComplete){
+				return true;
+			}
+			// wait to pretend thread asynchrony
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+			}
+		}
+		throw new TimeoutException("No connection after "+timeOut+" seconds.");
 	}
 	
 	

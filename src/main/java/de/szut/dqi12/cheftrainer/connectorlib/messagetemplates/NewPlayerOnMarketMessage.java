@@ -15,9 +15,9 @@ import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
  * @author Alexander Brennecke
  *
  */
-public class NewPlayerOnMarketMessage extends Message{
+public class NewPlayerOnMarketMessage extends TransfermarktUpdateMessageTemplate{
 	
-	private final static String ID = ClientToServer_MessageIDs.TRANSFER_MARKET;
+	private final static String ID = MIDs.NEW_MARKET_PLAYER;
 	private final static String ADD_PLAYER = "addPlayer";
 	private Player player;
 	private int managerID;
@@ -46,18 +46,17 @@ public class NewPlayerOnMarketMessage extends Message{
 	}
 	
 	@Override
-	public void createMessageContent(){
+	JSONObject createJSON(){
 		JSONObject playerObject = player.toJSON();
 		
 		JSONObject messageContent = new JSONObject();
-		messageContent.put(MIDs.TYPE, MIDs.NEW_MARKET_PLAYER);
 		
 		messageContent.put(ADD_PLAYER, addPlayer);
 		messageContent.put(Manager.MANAGER_ID, managerID);
 		messageContent.put(Community.COMMUNITY_ID, communityID);
 		messageContent.put(Player.PLAYER, playerObject);
 		
-		setMessageContent(messageContent);
+		return messageContent;
 	}
 	
 	// GETTER AND SETTER
@@ -93,6 +92,4 @@ public class NewPlayerOnMarketMessage extends Message{
 	public void setAddPlayer(boolean addPlayer) {
 		this.addPlayer = addPlayer;
 	}
-	
-	
 }
