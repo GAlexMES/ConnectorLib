@@ -1,7 +1,7 @@
 package de.szut.dqi12.cheftrainer.connectorlib.utils;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,7 +20,7 @@ public class JSONUtils {
 	 * @param map the Map, that should be transformed to a JSON.
 	 * @return a new JSONObject with the map information inside.
 	 */
-	public static JSONObject mapToJSON(HashMap<String,Boolean> map) {
+	public static JSONObject mapToJSON(Map<String,Boolean> map) {
         JSONObject retval = new JSONObject();
         
         for(String key : map.keySet() ){

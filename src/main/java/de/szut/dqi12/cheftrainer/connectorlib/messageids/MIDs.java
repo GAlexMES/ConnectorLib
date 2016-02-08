@@ -9,8 +9,8 @@ public class MIDs {
 	public static final String ENTER = "enter";
 	
 	public static final String CREATED = "created";
-	public static final String AUTHENTIFICATION_TYPE = "authentificationType";
-	public static final String AUTHENTIFICATE = "authentificate";
+	public static final String AUTHENTICATION_TYPE = "authenticationType";
+	public static final String AUTHENTICATE = "authenticate";
 	public static final String REGISTRATION = "registration";
 	public static final String LOGIN = "login";
 	

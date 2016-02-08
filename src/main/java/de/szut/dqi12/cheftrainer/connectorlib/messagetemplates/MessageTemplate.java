@@ -7,7 +7,7 @@ abstract class MessageTemplate extends Message{
 	public MessageTemplate(String messageID) {
 		super(messageID);
 	}
-
+	
 	@Override
 	abstract public void createMessageContent();
 	

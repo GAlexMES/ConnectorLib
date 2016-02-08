@@ -12,7 +12,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
  * @author Alexander Brennecke
  *
  */
-public class UserAuthentificationMessage extends Message{
+public class UserAuthentificationMessage extends MessageTemplate{
 	private final static String ID = ClientToServer_MessageIDs.USER_AUTHENTICATION;
 	private final static String USER  = "User";
 	private User user;
@@ -21,7 +21,7 @@ public class UserAuthentificationMessage extends Message{
 	public UserAuthentificationMessage(JSONObject json){
 		super(ID);
 		user = new User(json.getJSONObject(USER));
-		authentificationType = json.getString(MIDs.AUTHENTIFICATION_TYPE);
+		authentificationType = json.getString(MIDs.AUTHENTICATION_TYPE);
 	}
 	
 	public UserAuthentificationMessage() {
@@ -32,7 +32,7 @@ public class UserAuthentificationMessage extends Message{
 	@Override
 	public void createMessageContent(){
 		JSONObject message = new JSONObject();
-		message.put(MIDs.AUTHENTIFICATION_TYPE, authentificationType);
+		message.put(MIDs.AUTHENTICATION_TYPE, authentificationType);
 		message.put(USER,user.toJSON());
 		
 		messageContent = message.toString();
