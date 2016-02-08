@@ -14,6 +14,11 @@ import de.szut.dqi12.cheftrainer.connectorlib.utils.JSONUtils;
 public class CommunityAutenticationAckMessage extends MessageTemplate {
 
 	private final static String ID = ServerToClient_MessageIDs.COMMUNITY_AUTHENTICATION_ACK;
+	private static final String CORRECT_PASSWORD="correctPassword";
+	private static final String COMMUNITY_EXISTS = "existCommunity";
+	private static final String MANAGER_CREATED = "managerCreated";
+	
+	
 	private Map<String, Boolean> enterFeedback = new HashMap<>();
 	private String type;
 
@@ -38,9 +43,9 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 
 	private void init() {
 		enterFeedback.put(MIDs.USER_EXISTS, false);
-		enterFeedback.put(MIDs.COMMUNITY_EXISTS, false);
-		enterFeedback.put(MIDs.CORRECT_PASSWORD, false);
-		enterFeedback.put(MIDs.MANAGER_CREATED, false);
+		enterFeedback.put(COMMUNITY_EXISTS, false);
+		enterFeedback.put(CORRECT_PASSWORD, false);
+		enterFeedback.put(MANAGER_CREATED, false);
 	}
 
 	@Override
@@ -63,15 +68,15 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 	}
 
 	public void setCommunityExists(boolean flag) {
-		enterFeedback.put(MIDs.COMMUNITY_EXISTS, flag);
+		enterFeedback.put(COMMUNITY_EXISTS, flag);
 	}
 
 	public void setCorrectPassword(boolean flag) {
-		enterFeedback.put(MIDs.CORRECT_PASSWORD, flag);
+		enterFeedback.put(CORRECT_PASSWORD, flag);
 	}
 
 	public void setManagerCreated(boolean flag) {
-		enterFeedback.put(MIDs.MANAGER_CREATED, flag);
+		enterFeedback.put(MANAGER_CREATED, flag);
 	}
 
 	public boolean userExists() {
@@ -79,15 +84,15 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 	}
 
 	public boolean communityExists() {
-		return enterFeedback.get(MIDs.COMMUNITY_EXISTS);
+		return enterFeedback.get(COMMUNITY_EXISTS);
 	}
 
 	public boolean correctPassword() {
-		return enterFeedback.get(MIDs.CORRECT_PASSWORD);
+		return enterFeedback.get(CORRECT_PASSWORD);
 	}
 
 	public boolean managerCreated() {
-		return enterFeedback.get(MIDs.MANAGER_CREATED);
+		return enterFeedback.get(MANAGER_CREATED);
 	}
 
 	public String getType() {

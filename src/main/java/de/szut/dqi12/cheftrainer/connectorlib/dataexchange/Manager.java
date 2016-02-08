@@ -176,6 +176,8 @@ public class Manager extends Sendable {
 		return managerJSON;
 	}
 
+	
+	//GETTER AND SETTER
 	public Map<Integer, Integer> getHistory() {
 		return history;
 	}

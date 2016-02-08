@@ -126,8 +126,9 @@ public class Player extends Sendable {
 		}
 	}
 
-	/*
+	/**
 	 * This function allows to set the birthday of a player by string.
+	 * @param birthday the birthday as valid String (e.g. 15.04.2014)
 	 */
 	public void setBirthdate(String birthday) {
 		Pattern p = Pattern.compile("\\d+\\.\\d+\\.\\d+");

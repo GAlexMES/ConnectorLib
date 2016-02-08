@@ -74,6 +74,8 @@ public class Transaction extends Sendable {
 		player= players.get(playerSportalID);
 	}
 	
+	//GETTER AND SETTER
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -121,6 +123,4 @@ public class Transaction extends Sendable {
 	public boolean isOutgoing() {
 		return outgoing;
 	}
-	
-	
 }

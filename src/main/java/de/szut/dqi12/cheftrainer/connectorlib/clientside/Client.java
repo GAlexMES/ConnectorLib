@@ -69,18 +69,6 @@ public class Client {
 		}
 	}
 	
-	public String getServerIP(){
-		return socket.getInetAddress().toString();
-	}
-	
-	public int getServerPort(){
-		return socket.getPort();
-	}
-	
-	public ServerHandler getServerHandler(){
-		return servHandler;
-	}
-	
 	/**
 	 * This function waits for the completion of the handshake.
 	 * @param timeOut the time out in seconds
@@ -106,5 +94,18 @@ public class Client {
 		throw new TimeoutException("No connection after "+timeOut+" seconds.");
 	}
 	
+	// GETTER AND SETTER
+	
+	public String getServerIP(){
+		return socket.getInetAddress().toString();
+	}
+	
+	public int getServerPort(){
+		return socket.getPort();
+	}
+	
+	public ServerHandler getServerHandler(){
+		return servHandler;
+	}
 	
 }

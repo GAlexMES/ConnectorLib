@@ -43,10 +43,8 @@ public class Session {
 	}
 
 	
-	/**
-	 * Should only be used on the server side.
-	 * 
-	 * @return
+	 /** Should only be used on the server side.
+	 * @return the {@link ClientHandler} object
 	 */
 	public ClientHandler getClientHandler() {
 		return clientHandler;

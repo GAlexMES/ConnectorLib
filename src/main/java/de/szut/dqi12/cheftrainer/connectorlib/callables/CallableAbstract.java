@@ -20,8 +20,8 @@ public abstract class CallableAbstract {
 	}
 
 	/**
-	 * Must be overriden by every class, extends from this class. Is called by the CallableController, which creates a new instance with this function.
-	 * @return
+	 * Must be overridden by every class, extends from this class. Is called by the CallableController, which creates a new instance with this function.
+	 * @return a CallableAbstract instance
 	 */
 	public static CallableAbstract newInstance() {
 		return null;

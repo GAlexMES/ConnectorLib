@@ -15,6 +15,9 @@ import de.szut.dqi12.cheftrainer.connectorlib.utils.JSONUtils;
 public class UserCommunityListMessage extends MessageTemplate {
 
 	private static final String ID = ServerToClient_MessageIDs.USER_COMMUNITY_LIST;
+	private static final String COMMUNITY = "community";
+	
+	
 	private String type;
 	private List<Transaction> transactions = new ArrayList<>();
 	private List<Community> communityList = new ArrayList<>();
@@ -36,7 +39,7 @@ public class UserCommunityListMessage extends MessageTemplate {
 			break;
 		case MIDs.NEW_COMMUNITY:
 		case MIDs.INIT:
-			JSONArray communityJSON = json.getJSONArray(MIDs.COMMUNITY);
+			JSONArray communityJSON = json.getJSONArray(COMMUNITY);
 			for(int i = 0; i<communityJSON.length();i++){
 				communityList.add(new Community(communityJSON.getJSONObject(i)));
 			}
@@ -57,7 +60,7 @@ public class UserCommunityListMessage extends MessageTemplate {
 		case MIDs.NEW_COMMUNITY:
 		case MIDs.INIT:
 			JSONArray communityJSON = JSONUtils.listToJSON(communityList);
-			json.put(MIDs.COMMUNITY, communityJSON);
+			json.put(COMMUNITY, communityJSON);
 			break;
 		}
 		messageContent = json.toString();

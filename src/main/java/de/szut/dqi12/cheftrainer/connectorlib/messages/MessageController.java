@@ -43,8 +43,7 @@ public class MessageController {
 			Handshake_MessageIDs.HANDSHAKE_ACK,
 			Handshake_MessageIDs.RSA_PUBLIC_KEY };
 
-	private final static Logger LOGGER = Logger
-			.getLogger(MessageController.class);
+	private final static Logger LOGGER = Logger.getLogger(MessageController.class);
 
 	private ClientHandler clientHandler;
 	private Session session;

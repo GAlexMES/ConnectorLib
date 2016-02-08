@@ -1,7 +1,5 @@
 package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +7,6 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import de.szut.dqi12.cheftrainer.connectorlib.cipher.CipherFactory;
 
 /**
  * The Community Model class, which saves all necessary for a {@link Community}.

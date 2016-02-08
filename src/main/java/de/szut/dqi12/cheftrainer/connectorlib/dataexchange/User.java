@@ -27,10 +27,17 @@ public class User extends Sendable{
 	
 	int userID;
 	
+	/**
+	 * Empty Constructor
+	 */
 	public User(){
 		
 	}
 	
+	/**
+	 * Constructor for initialization via {@link JSONObject}
+	 * @param json a valid {@link JSONObject} with all needed information inside
+	 */
 	public User(JSONObject json){
 		firstName = json.getString(FIRST_NAME);
 		lastName = json.getString(LAST_NAME);
@@ -57,6 +64,8 @@ public class User extends Sendable{
 		
 		return retval;
 	}
+	
+	//GETTER AND SETTER
 	public String getFirstName() {
 		return firstName;
 	}

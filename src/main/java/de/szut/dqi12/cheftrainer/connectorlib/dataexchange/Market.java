@@ -13,7 +13,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.utils.JSONUtils;
 
 /**
  * This class is the model class for the transfer market.
- * @author Robin
+ * @author Robin and Alexander Brennecke
  *
  */
 public class Market extends Sendable{

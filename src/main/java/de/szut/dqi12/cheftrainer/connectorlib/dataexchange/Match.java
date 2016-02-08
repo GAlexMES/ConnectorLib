@@ -43,6 +43,9 @@ public class Match {
 			this.goalsGuest=-1;
 		}
 	}
+	
+	
+	//GETTER AND SETTER
 	public int getSportalMatchID() {
 		return sportalMatchID;
 	}

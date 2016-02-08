@@ -8,6 +8,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.ServerToClient_MessageI
 public class SaveFormationAckMessage extends MessageTemplate {
 
 	private final static String ID= ServerToClient_MessageIDs.SAVE_FORMATION_ACK;
+	private static final String SUCCESFUL = "successful";
 	private boolean successful;
 	
 	public SaveFormationAckMessage(boolean successful) {
@@ -18,14 +19,14 @@ public class SaveFormationAckMessage extends MessageTemplate {
 	
 	public SaveFormationAckMessage(JSONObject json) {
 		super(ID);
-		successful = json.getBoolean(MIDs.SUCCESFULL);
+		successful = json.getBoolean(SUCCESFUL);
 	}
 	
 	
 	@Override
 	public void createMessageContent() {
 		JSONObject json = new JSONObject();
-		json.put(MIDs.SUCCESFULL, successful);
+		json.put(SUCCESFUL, successful);
 		messageContent = json.toString();
 	}
 	
