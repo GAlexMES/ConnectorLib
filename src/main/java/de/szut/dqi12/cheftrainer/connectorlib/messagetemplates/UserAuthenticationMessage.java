@@ -8,24 +8,24 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
 /**
- * The {@link UserAuthentificationMessage} should be used, when a user wants to login or registrate to the server.
+ * The {@link UserAuthenticationMessage} should be used, when a user wants to login or registrate to the server.
  * @author Alexander Brennecke
  *
  */
-public class UserAuthentificationMessage extends MessageTemplate{
+public class UserAuthenticationMessage extends MessageTemplate{
 	private final static String ID = ClientToServer_MessageIDs.USER_AUTHENTICATION;
 	private static final String AUTHENTICATION_TYPE = "authenticationType";
 	private final static String USER  = "User";
 	private User user;
 	private String authentificationType;
 	
-	public UserAuthentificationMessage(JSONObject json){
+	public UserAuthenticationMessage(JSONObject json){
 		super(ID);
 		user = new User(json.getJSONObject(USER));
 		authentificationType = json.getString(AUTHENTICATION_TYPE);
 	}
 	
-	public UserAuthentificationMessage() {
+	public UserAuthenticationMessage() {
 		super(ID);
 	}
 
