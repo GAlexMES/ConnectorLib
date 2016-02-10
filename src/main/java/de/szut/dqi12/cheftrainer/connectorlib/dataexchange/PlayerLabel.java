@@ -4,11 +4,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * @author Robin
+ * A Label which contains required informations and methods for a Player.
+ * These informations are the id of the Player, this position and an image of the Player.
+ */
 public class PlayerLabel extends Label {
 	private int id;
 	private Image image;
 	private String position;
 
+	//getters and setters
 	public String getPosition() {
 		return position;
 	}
