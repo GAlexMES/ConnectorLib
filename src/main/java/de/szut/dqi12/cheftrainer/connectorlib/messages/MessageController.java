@@ -55,7 +55,6 @@ public class MessageController {
 	 * 
 	 * @param idMappers
 	 */
-	@SuppressWarnings("unchecked")
 	public MessageController(List<IDClass_Path_Mapper> idMappers) {
 
 		callableMap = new HashMap<String, CallableAbstract>();
