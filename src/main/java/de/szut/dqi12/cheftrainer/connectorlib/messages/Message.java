@@ -16,6 +16,12 @@ public class Message {
 
 	private String messageID;
 	protected String messageContent;
+	
+	/**
+	 * Constructor
+	 */
+	public Message() {
+	}
 
 	/**
 	 * Constructor

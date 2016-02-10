@@ -6,9 +6,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Community;
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Manager;
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Market;
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Player;
-import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
-import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
 /**
  * This Message should be used, when a new {@link Player} should be added to the {@link Market}.

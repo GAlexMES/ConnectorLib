@@ -6,9 +6,15 @@ import java.security.NoSuchAlgorithmException;
 import org.json.JSONObject;
 
 import de.szut.dqi12.cheftrainer.connectorlib.cipher.CipherFactory;
+import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Community;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
+/**
+ * The {@link CommunityAuthenticationMessage} should be used by the client. It should be used to either register a new {@link Community} or to enter an existing one.
+ * @author Alexander Brennecke
+ *
+ */
 public class CommunityAuthenticationMessage extends MessageTemplate	 {
 
 	private static final String ID = ClientToServer_MessageIDs.COMMUNITY_AUTHENTICATION;
@@ -16,11 +22,19 @@ public class CommunityAuthenticationMessage extends MessageTemplate	 {
 	private String name;
 	private String password;
 	
+	/**
+	 * Constructor
+	 * @param type should be MIDs.ENTER or MIDs.CREATION
+	 */
 	public CommunityAuthenticationMessage(String type) {
 		super(ID);
 		this.type= type;
 	}
 	
+	/**
+	 * JSON Constructor
+	 * @param json the {@link JSONObject}. Create it via "createMessageContent()".
+	 */
 	public CommunityAuthenticationMessage(JSONObject json) {
 		super(ID);
 		type = json.getString(MIDs.TYPE);
@@ -50,6 +64,10 @@ public class CommunityAuthenticationMessage extends MessageTemplate	 {
 		return password;
 	}
 
+	/**
+	 * The password will be set as MD5 hash. It is not possible to store the password in plain text.
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		try {
 			this.password = CipherFactory.getMD5(password);

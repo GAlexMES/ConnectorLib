@@ -11,6 +11,11 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ServerToClient_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.utils.JSONUtils;
 
+/**
+ * The CommunityAutenticationAckMessage is a Message Template to send the acknowledgment of an community registration or entering to the client.
+ * @author Alexander Brennecke
+ *
+ */
 public class CommunityAutenticationAckMessage extends MessageTemplate {
 
 	private final static String ID = ServerToClient_MessageIDs.COMMUNITY_AUTHENTICATION_ACK;
@@ -22,11 +27,18 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 	private Map<String, Boolean> enterFeedback = new HashMap<>();
 	private String type;
 
+	/**
+	 * Constructor.
+	 */
 	public CommunityAutenticationAckMessage() {
 		super(ID);
 		init();
 	}
 
+	/**
+	 * JSON Constructor
+	 * @param json the {@link JSONObject}. Create it via "createMessageContent()".
+	 */
 	public CommunityAutenticationAckMessage(JSONObject json) {
 		super(ID);
 		init();
@@ -41,6 +53,9 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 		
 	}
 
+	/**
+	 * Defines the enterFeedback with all Key/Value pairs, that will be used, to provide NPE.
+	 */
 	private void init() {
 		enterFeedback.put(MIDs.USER_EXISTS, false);
 		enterFeedback.put(COMMUNITY_EXISTS, false);
@@ -55,6 +70,7 @@ public class CommunityAutenticationAckMessage extends MessageTemplate {
 		messageContent = json.toString();
 	}
 
+	//GETTER AND SETTER
 	public void setEnterType() {
 		this.type = MIDs.ENTER;
 	}
