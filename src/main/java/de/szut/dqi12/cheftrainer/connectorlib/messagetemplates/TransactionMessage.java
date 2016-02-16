@@ -2,9 +2,16 @@ package de.szut.dqi12.cheftrainer.connectorlib.messagetemplates;
 
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Player;
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Transaction;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 
+/**
+ * The TransactionMessage should be used by the client application.
+ * It should be send, when the user wants to remove an offer or accept an offer to one of his {@link Player}s.
+ * @author Alexander Brennecke
+ *
+ */
 public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 
 	private final static String ID = MIDs.TRANSACTION;
@@ -16,6 +23,12 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 	private boolean accept;
 	private boolean remove;
 
+	/**
+	 * Constructor
+	 * @param tr a {@link Transaction} object, which is full initialized and represents the offer, that should be accepted/removed etc.
+	 * @param accept true = the offer is accepted.
+	 * @param remove true= the offer should be removed out of the database.
+	 */
 	public TransactionMessage(Transaction tr, boolean accept, boolean remove) {
 		super(ID);
 		this.transaction = tr;
@@ -23,6 +36,10 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 		this.remove = remove;
 	}
 
+	/**
+	 * JSON Constructor
+	 * @param json the {@link JSONObject}. Create it via "createMessageContent()".
+	 */
 	public TransactionMessage(JSONObject json) {
 		super(ID);
 		accept = json.getBoolean(ACCEPT);

@@ -12,6 +12,14 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ServerToClient_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.utils.JSONUtils;
 
+/**
+ * The {@link UserCommunityListMessage} is used by the server application.
+ * It contains a list of {@link Community} and/or {@link Transaction} objects.
+ * It can be used, when the user connected succesful, to send him a list of his {@link Community}s.
+ * It can be used to update a single {@link Community}.
+ * @author Alexander Brennecke
+ *
+ */
 public class UserCommunityListMessage extends MessageTemplate {
 
 	private static final String ID = ServerToClient_MessageIDs.USER_COMMUNITY_LIST;
@@ -22,11 +30,19 @@ public class UserCommunityListMessage extends MessageTemplate {
 	private List<Transaction> transactions = new ArrayList<>();
 	private List<Community> communityList = new ArrayList<>();
 
+	/**
+	 * Constructor
+	 * @param type Should be MIDs.UPDATE_COMMUNITY, MIDs.NEW_COMMUNITY or MIDs.INIT
+	 */
 	public UserCommunityListMessage(String type) {
 		super(ID);
 		this.type = type;
 	}
 
+	/**
+	 * JSON Constructor
+	 * @param json the {@link JSONObject}. Create it via "createMessageContent()".
+	 */
 	public UserCommunityListMessage(JSONObject json) {
 		super(ID);
 		type = json.getString(MIDs.TYPE);
@@ -66,6 +82,7 @@ public class UserCommunityListMessage extends MessageTemplate {
 		messageContent = json.toString();
 	}
 
+	//GETTER AND SETTER
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}

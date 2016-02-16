@@ -3,16 +3,27 @@ package de.szut.dqi12.cheftrainer.connectorlib.messagetemplates;
 
 import org.json.JSONObject;
 
+import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Market;
+import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Transaction;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
+/**
+ * The {@link TransfermarktUpdateMessageTemplate} is used by various messages, that do something with the {@link Market} or {@link Transaction}s.
+ * @author Alexander Brennecke
+ *
+ */
 abstract class TransfermarktUpdateMessageTemplate extends MessageTemplate{
 	private final static String ID = ClientToServer_MessageIDs.TRANSFER_MARKET;
 	private String messageType;
 	private JSONObject content;
 	private Message message;
 	
+	/**
+	 * Constructor
+	 * @param messageType the ID of the message, the extends the {@link TransfermarktUpdateMessageTemplate}
+	 */
 	public TransfermarktUpdateMessageTemplate(String messageType) {
 		super(ID);
 		this.messageType = messageType;

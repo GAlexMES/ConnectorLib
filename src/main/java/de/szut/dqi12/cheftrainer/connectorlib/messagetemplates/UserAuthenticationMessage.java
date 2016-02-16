@@ -19,16 +19,24 @@ public class UserAuthenticationMessage extends MessageTemplate{
 	private User user;
 	private String authentificationType;
 	
+	
+	/**
+	 * Constructor
+	 */
+	public UserAuthenticationMessage() {
+		super(ID);
+	}
+	
+	/**
+	 * JSON Constructor
+	 * @param json the {@link JSONObject}. Create it via "createMessageContent()".
+	 */
 	public UserAuthenticationMessage(JSONObject json){
 		super(ID);
 		user = new User(json.getJSONObject(USER));
 		authentificationType = json.getString(AUTHENTICATION_TYPE);
 	}
 	
-	public UserAuthenticationMessage() {
-		super(ID);
-	}
-
 	
 	@Override
 	public void createMessageContent(){
