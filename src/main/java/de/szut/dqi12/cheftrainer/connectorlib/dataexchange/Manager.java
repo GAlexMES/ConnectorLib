@@ -225,7 +225,16 @@ public class Manager extends Sendable {
 		}
 	}
 
-	public List<Player> getLineUp() {
+	public List<Player> getLineUp(boolean calculate) {
+		if(calculate){
+			List<Player> retval = new ArrayList<>();
+			for(Player p : players){
+				if(p.plays()){
+					retval.add(p);
+				}
+			}
+			return retval;
+		}
 		return lineUp;
 	}
 

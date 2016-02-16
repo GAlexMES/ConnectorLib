@@ -44,7 +44,7 @@ public class NewPlayerOnMarketMessage extends TransfermarktUpdateMessageTemplate
 	}
 	
 	@Override
-	JSONObject createJSON(){
+	public JSONObject createJSON(){
 		JSONObject playerObject = player.toJSON();
 		
 		JSONObject messageContent = new JSONObject();

@@ -34,6 +34,7 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 		this.transaction = tr;
 		this.accept = accept;
 		this.remove = remove;
+		messageContent = createJSON().toString();
 	}
 
 	/**
@@ -42,9 +43,10 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 	 */
 	public TransactionMessage(JSONObject json) {
 		super(ID);
-		accept = json.getBoolean(ACCEPT);
-		remove = json.getBoolean(REMOVE);
-		transaction = new Transaction(json.getJSONObject(MIDs.TRANSACTION));
+		JSONObject information = json.getJSONObject(MIDs.INFORMATION);
+		accept = information.getBoolean(ACCEPT);
+		remove = information.getBoolean(REMOVE);
+		transaction = new Transaction(information.getJSONObject(MIDs.TRANSACTION));
 	}
 
 	@Override
@@ -64,6 +66,7 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 
 	public void setTransaction(Transaction transaction) {
 		this.transaction = transaction;
+		messageContent = createJSON().toString();
 	}
 
 	public boolean isAccept() {
@@ -72,6 +75,7 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 
 	public void setAccept(boolean accept) {
 		this.accept = accept;
+		messageContent = createJSON().toString();
 	}
 
 	public boolean isRemove() {
@@ -80,5 +84,6 @@ public class TransactionMessage extends TransfermarktUpdateMessageTemplate {
 
 	public void setRemove(boolean remove) {
 		this.remove = remove;
+		messageContent = createJSON().toString();
 	}
 }
