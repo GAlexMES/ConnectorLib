@@ -36,7 +36,11 @@ public class PlayerLabel extends Label {
 	}
 
 	public void setImage(Image image) {
-		this.setGraphic(new ImageView(image));
+		ImageView iv = new ImageView();
+		iv.fitHeightProperty().bind(this.heightProperty());
+		iv.fitWidthProperty().bind(this.heightProperty());
+		iv.setImage(image);
+		this.setGraphic(iv);
 		this.image = image;
 	}
 
