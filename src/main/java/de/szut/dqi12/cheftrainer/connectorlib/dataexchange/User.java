@@ -11,7 +11,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 /**
  * The user class saves all information about the user, who has been logged in at the client.
  * @author Alexander Brennecke
- * @custom.position /D0010/
+ * @see /D0010/
  */
 public class User extends Sendable{
 	

@@ -4,8 +4,6 @@ import org.json.JSONObject;
 
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.User;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageIDs;
-import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
-import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
 /**
  * The {@link UserAuthenticationMessage} should be used, when a user wants to login or registrate to the server.

@@ -23,7 +23,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
  * one {@link Community}.
  * 
  * @author Robin
- * @custom.position /D0030/
+ * @see /D0030/
  */
 public class Manager extends Sendable {
 

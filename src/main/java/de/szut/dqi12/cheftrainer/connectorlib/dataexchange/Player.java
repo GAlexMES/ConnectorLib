@@ -12,7 +12,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
 /**
  * The player class stores all nested information about a player.
  * @author Robin
- * @custom.position /D0020/
+ * @see /D0020/
  */
 public class Player extends Sendable {
 
