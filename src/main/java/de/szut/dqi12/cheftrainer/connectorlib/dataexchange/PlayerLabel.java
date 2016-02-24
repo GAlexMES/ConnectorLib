@@ -49,7 +49,6 @@ public class PlayerLabel extends Label {
 		iv.setFitHeight(size);
 		double newWidth = size/180*150;
 		iv.setFitWidth(newWidth);
-		System.out.println("Image size ="+size+"x"+newWidth);
 	}
 
 	public void setPlayer(Player player) {
