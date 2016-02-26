@@ -242,6 +242,7 @@ public class Manager extends Sendable {
 		this.lineUp = lineUp;
 
 		List<Integer> sportalIDList = new ArrayList<>();
+		
 		for (Player p : lineUp) {
 			sportalIDList.add(p.getSportalID());
 		}

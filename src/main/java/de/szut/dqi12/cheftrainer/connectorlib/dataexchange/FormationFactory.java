@@ -14,6 +14,9 @@ public class FormationFactory {
 
 	public static final String FOUR_FOUR_TWO = "4-4-2";
 	public static final String FOUR_FIVE_ONE = "4-5-1";
+	public static final String THREE_FOUR_THREE = "3-4-3";
+	public static final String FOUR_THRE_THRE = "4-3-3";
+	public static final String THRE_FIVE_TWO = "3-5-2";
 	
 	private List<String> formationsList;
 	
