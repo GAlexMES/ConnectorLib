@@ -76,6 +76,17 @@ public class FormationFactory {
 			}
 		}
 	}
+	
+	public static int mostPlayerOnPosition(Formation f){
+		int retval = f.getDefenders();
+		int mid =f.getMiddfielders();
+		int of = f.getOffensives();
+		
+		retval = (retval>mid)?retval:mid;
+		retval = (retval>of)?retval:of;
+		
+		return retval;
+	}
 
 	// GETTER AND SETTER
 	public List<String> getFormationsList() {
