@@ -63,6 +63,7 @@ public class MessageController {
 
 		Iterator<?> it = callableMap.entrySet().iterator();
 		while (it.hasNext()) {
+			@SuppressWarnings("unchecked")
 			Map.Entry<String, CallableAbstract> pair = (Map.Entry<String, CallableAbstract>) it.next();
 			((CallableAbstract) pair.getValue()).setMessageController(this);
 		}

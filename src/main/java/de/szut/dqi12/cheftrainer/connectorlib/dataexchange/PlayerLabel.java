@@ -3,7 +3,6 @@ package de.szut.dqi12.cheftrainer.connectorlib.dataexchange;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -23,9 +22,9 @@ public class PlayerLabel extends Label {
 	private Player player;
 
 	public PlayerLabel() {
-		VBox content = new VBox();
 	}
 
+	@SuppressWarnings("static-access")
 	public void setImage(Image image) {
 		
 		if(content == null){

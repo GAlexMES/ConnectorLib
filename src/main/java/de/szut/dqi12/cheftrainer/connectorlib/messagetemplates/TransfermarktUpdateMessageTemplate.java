@@ -7,7 +7,6 @@ import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Market;
 import de.szut.dqi12.cheftrainer.connectorlib.dataexchange.Transaction;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageIDs;
 import de.szut.dqi12.cheftrainer.connectorlib.messageids.MIDs;
-import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 
 /**
  * The {@link TransfermarktUpdateMessageTemplate} is used by various messages, that do something with the {@link Market} or {@link Transaction}s.
@@ -17,8 +16,6 @@ import de.szut.dqi12.cheftrainer.connectorlib.messages.Message;
 abstract class TransfermarktUpdateMessageTemplate extends MessageTemplate{
 	private final static String ID = ClientToServer_MessageIDs.TRANSFER_MARKET;
 	private String messageType;
-	private JSONObject content;
-	private Message message;
 	
 	/**
 	 * Constructor

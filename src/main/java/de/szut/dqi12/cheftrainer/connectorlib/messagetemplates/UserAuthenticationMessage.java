@@ -8,6 +8,7 @@ import de.szut.dqi12.cheftrainer.connectorlib.messageids.ClientToServer_MessageI
 /**
  * The {@link UserAuthenticationMessage} should be used, when a user wants to login or registrate to the server.
  * @author Alexander Brennecke
+ * @see /F0011/ and /F0020/
  *
  */
 public class UserAuthenticationMessage extends MessageTemplate{
